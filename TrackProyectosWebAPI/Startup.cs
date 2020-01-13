@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using TrackProyectosWebAPI.Models;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace TrackProyectos
 {
@@ -28,6 +29,8 @@ namespace TrackProyectos
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddDbContext<APIDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
         }

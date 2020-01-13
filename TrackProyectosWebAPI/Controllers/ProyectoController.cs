@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TrackProyectosWebAPI.DTOs;
 using TrackProyectosWebAPI.Models;
 
 namespace TrackProyectos.Controllers
@@ -14,22 +16,24 @@ namespace TrackProyectos.Controllers
     public class ProyectoController : ControllerBase
     {
         private readonly APIDBContext _context;
+        private readonly IMapper _mapper;
         
-        public ProyectoController (APIDBContext context)
+        public ProyectoController (APIDBContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Proyecto>> GetProyecto(int id)
+        public async Task<ActionResult<ProyectoDTO>> GetProyecto(int id)
         {
             var proyecto = await _context.Proyectos.FindAsync(id);
 
             if (proyecto == null)
                 return NotFound();
 
-            return proyecto;
+            return _mapper.Map<ProyectoDTO>(proyecto);
         }
     }
 }
