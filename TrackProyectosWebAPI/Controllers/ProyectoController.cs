@@ -26,6 +26,7 @@ namespace TrackProyectos.Controllers
 
 
         [HttpGet("{id}")]
+        //GET :/Proyecto/:id
         public async Task<ActionResult<ProyectoDTO>> GetProyecto(int id)
         {
             var proyecto = await _context.Proyectos.FindAsync(id);

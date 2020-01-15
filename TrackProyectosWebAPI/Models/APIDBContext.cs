@@ -13,6 +13,7 @@ namespace TrackProyectosWebAPI.Models
         }
 
         public DbSet<Proyecto> Proyectos { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
     }
 }
