@@ -2,8 +2,6 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using TrackProyectosWebAPI;
 using TrackProyectosWebAPI.DTOs;
 
 namespace TrackProyectos.Controllers
