@@ -22,5 +22,7 @@ namespace TrackProyectosWebAPI.Models
 
         [Column(TypeName = "date")]
         public DateTime FechaFinalizacion { get; set; }
+
+        public string Link  { get; set; }
     }
 }

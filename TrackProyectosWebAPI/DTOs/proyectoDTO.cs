@@ -13,5 +13,7 @@ namespace TrackProyectosWebAPI.DTOs
         public DateTime FechaInicio { get; set; }
 
         public DateTime FechaFinalizacion { get; set; }
+
+        public string Link  { get; set; }
     }
 }
