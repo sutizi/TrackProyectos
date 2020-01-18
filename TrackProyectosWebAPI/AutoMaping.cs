@@ -28,7 +28,6 @@ public class AutoMapping : Profile
 
         CreateMap<Programador, ProgramadorDTO>().ReverseMap();
 
-        //CreateMap<IEnumerable<Proyecto>, IEnumerable<ProyectoDTO>>().ReverseMap();
          CreateMap<IList<Proyecto>, IList<ProyectoDTO>>().ReverseMap();
     }
 }

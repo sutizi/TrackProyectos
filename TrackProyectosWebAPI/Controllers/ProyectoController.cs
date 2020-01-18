@@ -58,5 +58,64 @@ namespace TrackProyectos.Controllers
 
             return proyectos;
         }
+
+
+        /*
+            Crea un nuevo proyecto
+        */
+        [HttpPost]
+        //POST :/Proyecto/
+        public async Task<ActionResult<ProyectoDTO>> PostProyecto(ProyectoDTO proyectoDTO)
+        {
+            var proyecto = _mapper.Map<Proyecto>(proyectoDTO);
+
+            _context.Proyectos.Add(proyecto);
+
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("ProyectoDTO", new { id = proyectoDTO.Id }, proyectoDTO);
+        }
+
+        /*
+            Permite editar un proyecto
+            params: id: id del proyecto que se quiere editar
+        */
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutBankAccount(int id, ProyectoDTO proyecto)
+        {
+
+            _context.Entry(proyecto).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                    throw;
+            }
+
+            return NoContent();
+        }
+
+        /*
+            Elimina el proyecto especificado y lo retorna
+            params: id: id del proyecto que se desea eliminar
+        */
+        // DELETE: Proyecto/id
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ProyectoDTO>> DeleteBankAccount(int id)
+        {
+            var proyecto = await _context.Proyectos.FindAsync(id);
+            if (proyecto == null)
+            {
+                return NotFound();
+            }
+
+            _context.Proyectos.Remove(proyecto);
+            await _context.SaveChangesAsync();
+
+            return _mapper.Map<ProyectoDTO>(proyecto);
+        }
     }
 }
