@@ -22,5 +22,8 @@ namespace TrackProyectos
 
         public DbSet<Proyecto> Proyectos { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Programador> Programadores { get; set; }
+
+        public DbSet<Hora> Horas { get; set; }
     }
 }

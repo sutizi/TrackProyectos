@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AutoMapper;
 using TrackProyectosWebApi.DTOs;
 using TrackProyectosWebAPI.DTOs;
@@ -18,5 +19,15 @@ public class AutoMapping : Profile
         CreateMap<UserModelDTO, User>().ReverseMap();
         CreateMap<RegisterModelDTO, User>().ReverseMap();
         CreateMap<UpdateModel, User>().ReverseMap();
+
+
+        CreateMap<Programador, ProgramadorDTO>().ReverseMap();
+
+        CreateMap<Hora, HoraDTO>().ReverseMap();
+
+        CreateMap<Programador, ProgramadorDTO>().ReverseMap();
+
+        //CreateMap<IEnumerable<Proyecto>, IEnumerable<ProyectoDTO>>().ReverseMap();
+         CreateMap<IList<Proyecto>, IList<ProyectoDTO>>().ReverseMap();
     }
 }
