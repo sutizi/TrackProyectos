@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TrackProyectos;
+using TrackProyectosWebAPI.Models;
 using TrackProyectosWebAPI.Models.Users;
 using WebApi.Helpers;
 
@@ -71,6 +72,13 @@ namespace TrackProyectosWebAPI.Services
             user.PasswordSalt = passwordSalt;
 
             _context.Users.Add(user);
+            _context.SaveChanges();
+
+            
+            //Al crear un usuario se crea un programador con el mismo ID
+            Programador programador = new Programador();
+
+            _context.Programadores.Add(programador);
             _context.SaveChanges();
 
             return user;

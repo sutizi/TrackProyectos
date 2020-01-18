@@ -19,6 +19,7 @@ public class AutoMapping : Profile
         CreateMap<UserModelDTO, User>().ReverseMap();
         CreateMap<RegisterModelDTO, User>().ReverseMap();
         CreateMap<UpdateModel, User>().ReverseMap();
+        CreateMap<RegisterModel, User>().ReverseMap();
 
 
         CreateMap<Programador, ProgramadorDTO>().ReverseMap();
