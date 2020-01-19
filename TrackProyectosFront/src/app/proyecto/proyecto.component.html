@@ -1,1 +1,62 @@
-<p>proyecto works!</p>
+<blockquote class="blockquote ml-5">
+
+    <h2>Track Proyectos</h2>
+    <footer class="blockquote-foter">
+        Medi el avance en tus proyectos personales
+    </footer>
+</blockquote>
+
+<div class="grid-table">
+    <div class="thead">
+        <div class="tr">
+            <div class="td">Nombre</div>
+            <div class="td">Descripcion</div>
+            <div class="td">FechaInicio</div>
+            <div class="td">FechaFinalizacion</div>
+        </div> 
+    </div>
+    <div class="tbody">
+        <form class="tr" [formGroup]="fg" *ngFor= "let fg of proyectoForms.controls" >
+    <div class="td">
+        <input class="form-control" formControlName="Nombre">
+    </div>
+    <div class="td">
+        <input class="form-control" formControlName="Descripcion">
+    </div>
+    <div class="td">
+        <div class="container">
+            <div class="row">
+                <div class='col-sm-6'>
+                    <input type='text' class="form-control" id='datetimepicker4' />
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker4').datetimepicker();
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="td">
+    <div class="container">
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" formControlName="FechaFinalizacion"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker("dd/MM/yyyy");
+            });
+        </script>
+    </div>
+    </div>
+</div>
+    </form>
+    </div>
