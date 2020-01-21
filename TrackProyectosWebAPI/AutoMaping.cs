@@ -12,12 +12,12 @@ public class AutoMapping : Profile
         CreateMap<Proyecto, ProyectoDTO>().ReverseMap();
        
         CreateMap<User, UserDTO>().ReverseMap();
-        CreateMap<RegisterModel, RegisterModelDTO>().ReverseMap();
-        CreateMap<UpdateModel, UpdateModelDTO>().ReverseMap();
+        CreateMap<RegisterModel, RegisterDTO>().ReverseMap();
+        CreateMap<UpdateModel, UpdateDTO>().ReverseMap();
         CreateMap<AuthenticateModel, AuthenticateModelDTO>().ReverseMap();
         
-        CreateMap<UserModelDTO, User>().ReverseMap();
-        CreateMap<RegisterModelDTO, User>().ReverseMap();
+        CreateMap<UserDTO, User>().ReverseMap();
+        CreateMap<RegisterDTO, User>().ReverseMap();
         CreateMap<UpdateModel, User>().ReverseMap();
         CreateMap<RegisterModel, User>().ReverseMap();
 

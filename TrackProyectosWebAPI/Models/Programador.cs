@@ -10,8 +10,6 @@ namespace TrackProyectosWebAPI.Models
         [Key]
         public int Id  { get; set; }
 
-        public int nousar { get; set; }
-
         [Column(TypeName = "int")]
         public virtual IList<Proyecto> Proyectos { get; set; }
     }

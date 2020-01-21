@@ -65,15 +65,13 @@ namespace TrackProyectos.Controllers
             {
                 Id = user.Id,
                 Username = user.Username,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
                 Token = tokenString
             });
         }
 
         [AllowAnonymous]
         [HttpPost("register")]
-        public IActionResult Register([FromBody]RegisterModelDTO modelParam)
+        public IActionResult Register([FromBody]RegisterDTO modelParam)
         {
             var model = _mapper.Map<RegisterModel>(modelParam);
             try
@@ -96,7 +94,7 @@ namespace TrackProyectos.Controllers
         public IActionResult GetAll()
         {
             var users = _userService.GetAll();
-            var model = _mapper.Map<IList<UserModelDTO>>(users);
+            var model = _mapper.Map<IList<UserDTO>>(users);
             return Ok(model);
         }
 
@@ -104,12 +102,12 @@ namespace TrackProyectos.Controllers
         public IActionResult GetById(int id)
         {
             var user = _userService.GetById(id);
-            var model = _mapper.Map<UserModelDTO>(user);
+            var model = _mapper.Map<UserDTO>(user);
             return Ok(model);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]UpdateModelDTO modelParam)
+        public IActionResult Update(int id, [FromBody]UpdateDTO modelParam)
         {
              var model = _mapper.Map<UpdateModel>(modelParam);
             // map model to entity and set id
