@@ -13,6 +13,7 @@ import { BoardUserComponent } from './board-user/board-user.component';
 import { ProfileComponent } from './profile/profile.component';
 
 import { authInterceptorProviders } from '../_helpers/auth.interceptor';
+import { EstadisticaComponent } from './estadistica/estadistica.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { authInterceptorProviders } from '../_helpers/auth.interceptor';
     RegisterComponent,
     HomeComponent,
     BoardUserComponent,
-    ProfileComponent
+    ProfileComponent,
+    EstadisticaComponent
   ],
   imports: [
     BrowserModule,
