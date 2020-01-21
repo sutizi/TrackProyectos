@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormArray } from '@angular/forms';
 import { ObservedValuesFromArray } from 'rxjs';
-import { ProyectoService } from '../shared/proyecto.service';
+import { ProyectoService } from '../_services/proyecto.service';
 
 @Component({
   selector: 'app-proyecto',
@@ -18,8 +18,8 @@ export class ProyectoComponent implements OnInit {
 
   ngOnInit() {
 
-    this.proyectoService.getProyecto().subscribe(res => this.proyecto = res);
-    this.addProyectoForm();
+    //this.proyectoService.getProyecto().subscribe(res => this.proyecto = res);
+    //this.addProyectoForm();
   }
 
   addProyectoForm(){
