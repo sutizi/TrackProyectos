@@ -8,6 +8,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { EstadisticaComponent } from './estadistica/estadistica.component';
 
+import { ProyectoCreateComponent } from './proyecto-create/proyecto-create.component';
+import { ProyectoEditComponent } from './proyecto-edit/proyecto-edit.component';
+import { ProyectoListComponent } from './proyecto-list/proyecto-list.component';
+
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -15,6 +19,9 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'user', component: BoardUserComponent },
   { path: 'estadistica', component: EstadisticaComponent },
+  { path: 'proyecto-create', component: ProyectoCreateComponent },
+  { path: 'proyecto-list', component: ProyectoListComponent },
+  { path: 'proyecto-edit/:id', component: ProyectoEditComponent },  
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
