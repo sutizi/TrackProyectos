@@ -45,7 +45,7 @@ namespace TrackProyectos.Controllers
             params: id: id del proyecto que se quiere obtener
         */
         [HttpGet("byProgramador/{id}")]
-        //GET :/Proyecto/byProgramador:id
+        //GET :/Proyecto/byProgramador/:id
         public async Task<ActionResult<IEnumerable<ProyectoDTO>>> GetProyectosByProgramador(int id)
         {
             var programador = await _context.Programadores.Include(t => t.Proyectos).FirstOrDefaultAsync(x => x.Id==id);
