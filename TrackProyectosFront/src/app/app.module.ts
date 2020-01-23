@@ -15,6 +15,7 @@ import { BoardUserComponent } from './board-user/board-user.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProyectoService } from './_services/proyecto.service';
 import { authInterceptorProviders } from '../_helpers/auth.interceptor';
+import { EstadisticaComponent } from './estadistica/estadistica.component';
 import { ProyectoCreateComponent } from './proyecto-create/proyecto-create.component';
 import { ProyectoEditComponent } from './proyecto-edit/proyecto-edit.component';
 import { ProyectoListComponent } from './proyecto-list/proyecto-list.component';
@@ -27,6 +28,7 @@ import { ProyectoListComponent } from './proyecto-list/proyecto-list.component';
     HomeComponent,
     BoardUserComponent,
     ProfileComponent,
+    EstadisticaComponent,
     ProyectoCreateComponent,
     ProyectoEditComponent,
     ProyectoListComponent
