@@ -81,6 +81,10 @@
   
       <div class="alert alert-success" *ngIf="isSuccessful">
         Your registration is successful!
+        <div class="form-group">
+          <a [routerLink]="['/proyecto-list']" class="btn btn-info">Comenzar</a>
+        </div>
       </div>
-    </div>
+
+    </div> 
   </div>

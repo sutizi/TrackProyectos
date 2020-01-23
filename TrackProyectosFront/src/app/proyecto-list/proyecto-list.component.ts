@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProyectoService } from '../_services/proyecto.service';
 
 @Component({
   selector: 'app-proyecto-list',
@@ -7,9 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProyectoListComponent implements OnInit {
 
-  constructor() { }
+  Proyecto: any = [];
+
+  constructor( public restApi: ProyectoService) { }
 
   ngOnInit() {
+    this.loadProyectos();
   }
+
+  loadProyectos() {
+    return this.restApi.getProyectos().subscribe((data: {}) => {
+      this.Proyecto = data;
+    })
+  }
+
+  deleteProyecto(id) {
+    if (window.confirm('¿Seguro que desea eliminarlo?')){
+      this.restApi.deleteProyecto(id).subscribe(data => {
+        this.loadProyectos()
+      })
+    }
+  }  
+
+
 
 }

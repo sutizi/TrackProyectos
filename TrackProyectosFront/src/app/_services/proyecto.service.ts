@@ -21,7 +21,7 @@ export class ProyectoService {
 
   
   //PROYECTOS POR PROGRAMADOR 
-  getProyectos(id: number): Observable<Proyecto[]> {
+  getProyectos(): Observable<Proyecto[]> {
     var item = JSON.parse(localStorage.getItem('currentUser'));
     var userId = item.id;
     return this.http.get<Proyecto[]>(API_URL+'byProgramador/' + userId)
