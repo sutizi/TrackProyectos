@@ -1,4 +1,5 @@
-export class Proyecto{
+export class ProyectoDTO{
+    
     id: number;
     nombre: string;
     descripcion: string;
