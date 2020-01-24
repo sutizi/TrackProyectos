@@ -4,10 +4,10 @@ import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  templateUrl: './perfil.component.html',
+  styleUrls: ['./perfil.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class PerfilComponent implements OnInit {
   form: any = {};
   isLoggedIn = false;
   isLoginFailed = false;

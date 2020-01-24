@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EstadisticaService } from '../_services/estadistica.service';
 
 @Component({
   selector: 'app-estadistica',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EstadisticaComponent implements OnInit {
 
-  constructor() { }
+  Estadistica: any = [];
+
+  constructor(public restApi: EstadisticaService) { }
 
   ngOnInit() {
+    this.loadEstadistica();
+  }
+
+  loadEstadistica() {
+    return this.restApi.GetEstadistica().subscribe((data: {}) => {
+      this.Estadistica = data;
+    })
   }
 
 }

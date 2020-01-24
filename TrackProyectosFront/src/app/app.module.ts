@@ -12,7 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { BoardUserComponent } from './board-user/board-user.component';
-import { ProfileComponent } from './profile/profile.component';
+import { PerfilComponent } from './perfil/perfil.component';
 import { ProyectoService } from './_services/proyecto.service';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { EstadisticaComponent } from './estadistica/estadistica.component';
@@ -27,7 +27,7 @@ import { ProyectoListComponent } from './proyecto-list/proyecto-list.component';
     RegisterComponent,
     HomeComponent,
     BoardUserComponent,
-    ProfileComponent,
+    PerfilComponent,
     EstadisticaComponent,
     ProyectoCreateComponent,
     ProyectoEditComponent,

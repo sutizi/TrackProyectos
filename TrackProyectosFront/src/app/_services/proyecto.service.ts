@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { Proyecto } from '../_models/proyecto';
+import { ProyectoDTO } from '../_models/ProyectoDTO';
 
-const API_URL = 'http://localhost:4000/Proyecto/'; //test
+const API_URL = 'http://localhost:4000/Proyecto/';
 
 @Injectable({
   providedIn: 'root'
@@ -21,49 +21,38 @@ export class ProyectoService {
 
   
   //PROYECTOS POR PROGRAMADOR 
-  getProyectos(): Observable<Proyecto[]> {
+  getProyectos(): Observable<ProyectoDTO[]> {
     var item = JSON.parse(localStorage.getItem('currentUser'));
     var userId = item.id;
-    return this.http.get<Proyecto[]>(API_URL+'byProgramador/' + userId)
+    return this.http.get<ProyectoDTO[]>(API_URL+'byProgramador/' + userId)
       .pipe(
-        retry(1),
         catchError(this.errorHandler)
       );
   }
 
-  saveProyecto(proyecto): Observable<Proyecto> {
-    return this.http.post<Proyecto>(API_URL, JSON.stringify(proyecto), this.httpOptions)
+  saveProyecto(proyecto): Observable<ProyectoDTO> {
+    return this.http.post<ProyectoDTO>(API_URL, JSON.stringify(proyecto), this.httpOptions)
       .pipe(
-        retry(1),
         catchError(this.errorHandler)
       );
   }
 
-  updateProyecto(id: number, proyecto): Observable<Proyecto> {
-    return this.http.put<Proyecto>(API_URL + id, JSON.stringify(proyecto), this.httpOptions)
+  updateProyecto(id: number, proyecto): Observable<ProyectoDTO> {
+    return this.http.put<ProyectoDTO>(API_URL + id, JSON.stringify(proyecto), this.httpOptions)
       .pipe(
-        retry(1),
         catchError(this.errorHandler)
       );
   }
 
-  deleteProyecto(id: number): Observable<Proyecto> {
-    return this.http.delete<Proyecto>(API_URL + id)
+  deleteProyecto(id: number): Observable<ProyectoDTO> {
+    return this.http.delete<ProyectoDTO>(API_URL + id)
       .pipe(
-        retry(1),
         catchError(this.errorHandler)
       );
   }
 
   errorHandler(error) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Get client-side error
-      errorMessage = error.error.message;
-    } else {
-      // Get server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
+    let errorMessage = error.error.message;
     console.log(errorMessage);
     return throwError(errorMessage);
   }
