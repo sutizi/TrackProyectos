@@ -11,9 +11,10 @@ import { EstadisticaComponent } from './estadistica/estadistica.component';
 import { ProyectoCreateComponent } from './proyecto-create/proyecto-create.component';
 import { ProyectoEditComponent } from './proyecto-edit/proyecto-edit.component';
 import { ProyectoListComponent } from './proyecto-list/proyecto-list.component';
+import { AuthGuard } from './_helpers/auth.guard';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, canActivate:[AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
