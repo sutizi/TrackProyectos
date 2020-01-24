@@ -1,20 +1,28 @@
 <div class="container custom-container-2">
 
+  <br>
+
     <!-- cuando no hay proyectos -->
-    <div class="no-data text-center" *ngIf="Proyecto.length == 0">
-      <p>No tienes proyectos todavia!</p>
-      <button class="btn btn-outline-primary" routerLink="/proyecto-create">Crear Proyecto</button>
+    <div class="card"  *ngIf="Proyecto.length == 0">
+      <div class="card-header">
+        <h5>No tienes proyectos todavia!</h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text">Comienza a medir el avance en tus proyectos creando uno ahora.</p>
+        <button class="btn btn-outline-primary" routerLink="/proyecto-create">Crear Proyecto</button>
+      </div>
     </div>
   
     <!-- listado de proyectos, se oculta cuando es vacia -->
     <div *ngIf="Proyecto.length !== 0">
       <h3 class="mb-3 text-center">Lista de Proyectos</h3>
+
+      <a class="btn btn-outline-primary" href="/proyecto-create" role="button">Crear Proyecto</a>
   
       <div class="col-md-12">
-        <table class="table table-bordered">
+        <table class="table">
           <thead>
             <tr>
-              <th scope="col">Identificador</th>
               <th scope="col">Nombre</th>
               <th scope="col">Descripcion</th>
               <th scope="col">Fecha de Inicio</th>
@@ -25,15 +33,14 @@
           </thead>
           <tbody>
             <tr *ngFor="let proyecto of Proyecto">
-              <td>{{proyecto.id}}</td>
               <td>{{proyecto.nombre}}</td>
               <td>{{proyecto.descripcion}}</td>
-              <td>{{proyecto.fechaInicio}}</td>
-              <td>{{proyecto.fechaFinalizacion}}</td>
+              <td>{{proyecto.fechaInicio | date: 'dd/MM/yyyy'}}</td>
+              <td>{{proyecto.fechaFinalizacion | date: 'dd/MM/yyyy'}}</td>
               <td>{{proyecto.link}}</td>
               <td>
-                <span class="edit" routerLink="/proyecto-edit/{{proyecto.id}}">Editar</span>
-                <span class="delete" (click)="deleteProyecto(proyecto.id)">Borrar</span>
+                <a class="btn btn-outline-primary btn-sm" href="/proyecto-edit/{{proyecto.id}}" role="button">Editar</a>
+                <a class="btn btn-outline-primary btn-sm" href="deleteProyecto(proyecto.id)" role="button">Eliminar</a>
               </td>
             </tr>
           </tbody>
