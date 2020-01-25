@@ -32,6 +32,6 @@ namespace TrackProyectosWebAPI.Models
         public virtual IList<Hora> Horas  { get; set; }
 
         [ForeignKey("Programador")]
-        public int ProgramadorID;
+        public int ProgramadorID { get; set; }
     }
 }
