@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProyectoService } from '../_services/proyecto.service';
 import { Router } from '@angular/router';
-import { Proyecto } from '../_models/proyecto';
+import { ProyectoDTO } from '../_models/ProyectoDTO';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -11,18 +11,18 @@ import { NgForm } from '@angular/forms';
 })
   
 export class ProyectoCreateComponent implements OnInit {
-  objtempemp:Proyecto;
+  objtempemp:ProyectoDTO;
   
   constructor( public restApi: ProyectoService, public router: Router) {}
 
-   @Input() objemp: Proyecto = new Proyecto();
+   @Input() objemp: ProyectoDTO = new ProyectoDTO();
    
    ngOnInit() { }
 
    Register(regForm:NgForm){
     var item = JSON.parse(localStorage.getItem('currentUser'));
     var userId = parseInt(item.id);
-    this.objtempemp=new Proyecto();
+    this.objtempemp=new ProyectoDTO();
     this.objtempemp.nombre=regForm.value.nombre;
     this.objtempemp.descripcion=regForm.value.descripcion;
     this.objtempemp.fechaInicio=regForm.value.fechaInicio;
