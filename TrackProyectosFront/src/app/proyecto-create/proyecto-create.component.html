@@ -1,10 +1,10 @@
 <div class="container" style="border:thin">  
-  <div class="col-md-12">
+  <div class="col-md-12"  style="width:90%" >
     <h3 class="mb-3 text-center">Crear Proyecto</h3>
-    <form #empadd='ngForm' (ngSubmit)="Register(empadd)" class="form-horizontal" style="width:50%"  > 
+      <form #empadd='ngForm' (ngSubmit)="Register(empadd)" class="form-horizontal"  > 
      
     <div class="form-group">
-      <input type="text"  [(ngModel)]='objemp.nombre' name="nombre"  #nombre="ngModel" class="form-control" placeholder="Nombre">
+      <input type="text"  [(ngModel)]='objemp.nombre' name="nombre" #nombre="ngModel" class="form-control" placeholder="Nombre" required>
     </div>
 
     <div class="form-group">
@@ -12,11 +12,11 @@
     </div>
     
     <div class="form-group">
-      <input type="text"  [(ngModel)]='objemp.fechaInicio' name="fechaInicio" #fechaInicio="ngModel" class="form-control" placeholder="Fecha de Inicio">
+      <input type="date"  [(ngModel)]='objemp.fechaInicio' name="fechaInicio" #fechaInicio="ngModel" class="form-control" placeholder="Fecha de Inicio" required>
     </div>
 
     <div class="form-group">
-      <input type="text"  [(ngModel)]='objemp.fechaFinalizacion' name="fechaFinalizacion" #fechaFinalizacion="ngModel"  class="form-control" placeholder="Fecha de Finalizacion">
+      <input type="date"  [(ngModel)]='objemp.fechaFinalizacion' name="fechaFinalizacion"  #fechaFinalizacion="ngModel"  class="form-control" placeholder="Fecha de Finalizacion" required>
     </div>
 
     <div class="form-group">
@@ -24,7 +24,11 @@
     </div>
 
     <div class="form-group">
-      <button class="btn btn-success btn-lg btn-block" >Crear Proyecto</button>
+      <button class="btn btn-success btn-lg btn-block" [disabled]="!empadd.form.valid">Crear Proyecto</button>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-secondary btn-lg btn-block" (click)="cancel()">Cancelar</button>
     </div>
 
     </form>
