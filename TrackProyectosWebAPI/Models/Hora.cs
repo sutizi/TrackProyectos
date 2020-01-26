@@ -21,7 +21,7 @@ namespace TrackProyectosWebAPI.Models
         public string Descripcion { get; set; }
 
         [ForeignKey("Proyecto")]
-        public int ProyectoID;
+        public int ProyectoID { get; set; }
 
     }
 }

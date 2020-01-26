@@ -9,6 +9,9 @@ namespace TrackProyectosWebAPI.DTOs
         public int Cantidad  { get; set; }
 
         public DateTime Dia { get; set; }
+        
         public string Descripcion { get; set; }
+
+        public int ProyectoID { get; set; }
     }
 }

@@ -38,7 +38,7 @@ namespace TrackProyectos.Controllers
 
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("ProyectoDTO", new { id = horaDTO.Id }, horaDTO);
+            return Ok();
         }
     }
 }
