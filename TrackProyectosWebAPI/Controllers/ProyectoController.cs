@@ -81,8 +81,9 @@ namespace TrackProyectos.Controllers
             params: id: id del proyecto que se quiere editar
         */
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBankAccount(int id, ProyectoDTO proyecto)
+        public async Task<IActionResult> PutProyecto(int id, ProyectoDTO proyectoDTO)
         {
+            var proyecto = _mapper.Map<Proyecto>(proyectoDTO);
 
             _context.Entry(proyecto).State = EntityState.Modified;
 

@@ -29,7 +29,7 @@ namespace TrackProyectosWebAPI.Models
         public string Link  { get; set; }
         
         [Column(TypeName = "date")]
-        public virtual IList<Hora> Horas  { get; set; }
+        public IList<Hora> Horas  { get; set; }
 
         [ForeignKey("Programador")]
         public int ProgramadorID { get; set; }
