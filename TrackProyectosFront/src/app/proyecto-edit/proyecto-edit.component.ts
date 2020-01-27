@@ -22,9 +22,9 @@ export class ProyectoEditComponent implements OnInit {
 
   updateProyecto() {
     if(window.confirm('¿Seguro que desea editarlo?')){
-      this.restApi.updateProyecto(this.id, this.proyectoData).subscribe(data => {
+      this.restApi.updateProyecto(this.id, this.proyectoData).subscribe((data: {}) => {
         this.router.navigate(['/proyecto-list'])
       })
-    }
+  }
   }
 }

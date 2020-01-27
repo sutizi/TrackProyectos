@@ -3,6 +3,7 @@ import { ProyectoService } from '../_services/proyecto.service';
 import { ProyectoDTO } from '../_models/ProyectoDTO';
 import { HoraDTO } from '../_models/HoraDTO';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-proyecto-list',
@@ -14,9 +15,13 @@ export class ProyectoListComponent implements OnInit {
 
   Proyecto: any = [];
 
+  id = this.actRoute.snapshot.params['id'];
+
   @Input() hora: HoraDTO = new HoraDTO();
 
-  constructor( public restApi: ProyectoService) { }
+  nuevo: HoraDTO = new HoraDTO();
+
+  constructor( public restApi: ProyectoService, public actRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadProyectos();
@@ -39,13 +44,14 @@ export class ProyectoListComponent implements OnInit {
 
    AgregarHoras(regForm:NgForm){
     var item = JSON.parse(localStorage.getItem('currentUser'));
-    this.hora=new HoraDTO();
-    this.hora.cantidad=regForm.value.cantidad;
-    this.hora.dia=regForm.value.dia;
-    this.hora.descripcion=regForm.value.descripcion;
-    //this.hora.proyectoID=idProyecto;
+    this.nuevo =new HoraDTO();
+    this.nuevo.cantidad=parseInt(regForm.value.cantidad);
+    //this.hora.dia=regForm.value.dia;
+   // this.hora.descripcion=regForm.value.descripcion;
+    this.nuevo.proyectoID=14;
+    console.log("........................." + this.id);
    
-    this.restApi.saveProyecto(this.hora).subscribe(res=>{
+    this.restApi.saveHoras(this.nuevo).subscribe(res=>{
         alert("Project Added successfully");
         this.router.navigate(['/proyecto-list'])
         })

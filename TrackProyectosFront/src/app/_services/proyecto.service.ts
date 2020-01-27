@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { ProyectoDTO } from '../_models/ProyectoDTO';
+import { HoraDTO } from '../_models/HoraDTO';
 
 const API_URL = 'http://localhost:4000/Proyecto/';
 
@@ -46,6 +47,13 @@ export class ProyectoService {
 
   deleteProyecto(id: number): Observable<ProyectoDTO> {
     return this.http.delete<ProyectoDTO>(API_URL + id)
+      .pipe(
+        catchError(this.errorHandler)
+      );
+  }
+
+  saveHoras(hora): Observable<HoraDTO> {
+    return this.http.post<HoraDTO>('http://localhost:4000/Hora/', JSON.stringify(hora), this.httpOptions)
       .pipe(
         catchError(this.errorHandler)
       );
