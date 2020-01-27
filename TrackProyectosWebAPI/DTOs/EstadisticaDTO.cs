@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 
 namespace TrackProyectosWebAPI.DTOs
 {
@@ -10,6 +10,8 @@ namespace TrackProyectosWebAPI.DTOs
         public int HorasMes { get; set; }
 
         public int HorasTotales { get; set; }
+
+        public IList<HoraDTO> HorasDTOSemana { get; set; }
 
     }
 }
