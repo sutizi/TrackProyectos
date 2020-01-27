@@ -1,6 +1,5 @@
 <div class="container custom-container">
-    <div class="col-md-12">
-      
+    <div class="col-md-12" style="width:90%" >
       <h3 class="mb-3 text-center">Actualizar Proyecto</h3>
   
       <div class="form-group">
@@ -12,21 +11,25 @@
       </div>
   
       <div class="form-group">
-        <input type="text" [(ngModel)]="proyectoData.fechaInicio" class="form-control" placeholder="Fecha de Inicio">
+        <input type="date" [(ngModel)]="proyectoData.fechaInicio" class="form-control" placeholder="Fecha de Inicio">
       </div>
 
       <div class="form-group">
-        <input type="date" [(ngModel)]="proyectoData.fechaFinalizacion">
-    </div>
+        <input type="date" [(ngModel)]="proyectoData.fechaFinalizacion" class="form-control" placeholder="Fecha de Finalizacion">
+      </div>
 
       <div class="form-group">
         <input type="text" [(ngModel)]="proyectoData.link" class="form-control" placeholder="Link">
       </div>
   
       <div class="form-group">
-        <button class="btn btn-success btn-lg btn-block" (click)="updateProyecto()">Actualizar</button>
+        <button class="btn btn-success btn-lg btn-block"  style="margin: 10px"  (click)="updateProyecto()">Actualizar</button>
       </div>
       
+      <div class="form-group">
+        <button class="btn btn-secondary btn-lg btn-block" style="margin: 10px" (click)="cancel()">Cancelar</button>
+      </div>
+
     </div>
   </div>
   

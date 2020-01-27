@@ -14,8 +14,8 @@ export class ProyectoEditComponent implements OnInit {
 
   constructor( public restApi: ProyectoService, public actRoute: ActivatedRoute, public router: Router) { }
 
-  ngOnInit() {
-    this.restApi.getProyectos().subscribe((data: {}) => {
+  ngOnInit() { 
+    this.restApi.getProyecto(this.id).subscribe((data: {}) => {
       this.proyectoData = data;
     })
   }
@@ -26,5 +26,8 @@ export class ProyectoEditComponent implements OnInit {
         this.router.navigate(['/proyecto-list'])
       })
   }
+  }
+  cancel() {
+    this.router.navigate(['/proyecto-list'])
   }
 }

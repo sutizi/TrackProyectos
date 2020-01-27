@@ -31,6 +31,13 @@ export class ProyectoService {
       );
   }
 
+  getProyecto(id: number): Observable<ProyectoDTO> {
+    return this.http.get<ProyectoDTO>(API_URL + id)
+    .pipe(
+      catchError(this.errorHandler)
+    );
+}
+
   saveProyecto(proyecto): Observable<ProyectoDTO> {
     return this.http.post<ProyectoDTO>(API_URL, JSON.stringify(proyecto), this.httpOptions)
       .pipe(

@@ -36,6 +36,8 @@ export class ProyectoCreateComponent implements OnInit {
         })
   }
 
-
+  cancel() {
+    this.router.navigate(['/proyecto-list'])
+  }
 
 }
