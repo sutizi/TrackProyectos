@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
+import { NgForm } from '@angular/forms';
+import { Usuario } from '../_models/usuario';
+import { Router } from '@angular/router';
+import { UserService } from '../_services/user.service';
+
 
 @Component({
   selector: 'app-login',
@@ -14,7 +19,11 @@ export class PerfilComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  @Input() usuario: Usuario = new Usuario();
+
+  nuevo: Usuario = new Usuario();
+
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, public restApi: UserService, public router: Router) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
@@ -40,6 +49,19 @@ export class PerfilComponent implements OnInit {
       }
     );
   }
+
+  actualizarUsuario(regForm:NgForm){
+    var item = JSON.parse(localStorage.getItem('currentUser'));
+    this.nuevo =new Usuario();
+    this.nuevo.username = regForm.value.username;
+    this.nuevo.email = regForm.value.email;
+    this.nuevo.password = regForm.value.password;
+
+    this.restApi.actualizarUsuario(this.nuevo).subscribe(res=>{
+        alert("Project Added successfully");
+        this.router.navigate(['/proyecto-list'])
+        })
+    }
 
   reloadPage() {
     window.location.reload();
