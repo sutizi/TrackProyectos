@@ -16,14 +16,15 @@ namespace TrackProyectosWebAPI.Models
 
 
         /*
-            Retorna las horas correspondientes al programador actual
+            Retorna las horas correspondientes a los proyectos
+            param: proyectos lista de proyectos de los que se quiere obtener las horas
         */
-        public IList<Hora> GetHoras()
+        public IList<Hora> GetHoras(IList<Proyecto> proyectos)
         {
             List<Hora> horas = new List<Hora>();
-            foreach (var proyecto in this.Proyectos)
+            foreach (var proyecto in proyectos)
             {
-                horas.Concat(proyecto.Horas);
+               horas.AddRange(proyecto.Horas);
             }
             return horas;
         }
