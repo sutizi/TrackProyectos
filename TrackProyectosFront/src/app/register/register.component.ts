@@ -28,10 +28,7 @@ export class RegisterComponent implements OnInit {
         this.isSignUpFailed = false;
       },
       err => {
-       console.log('Try Favorite - ', err.message);
-       //this.errorMessage = err.error.message;
-       throwError(err.message || err);
-       
+       this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
       }
     );
