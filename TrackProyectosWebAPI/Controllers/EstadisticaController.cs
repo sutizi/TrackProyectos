@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TrackProyectosWebAPI.DTOs;
@@ -32,6 +33,7 @@ namespace TrackProyectos.Controllers
             params: id: id del usuario que se quiere obtener las estadisticas
         */
         [HttpGet("{id}")]
+        [Authorize]
         //GET :/Estadistica/:id
         public async Task<ActionResult<EstadisticaDTO>> GetEstadistica(int id)
         {

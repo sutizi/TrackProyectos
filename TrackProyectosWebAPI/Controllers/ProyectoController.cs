@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TrackProyectosWebAPI.DTOs;
@@ -29,6 +30,7 @@ namespace TrackProyectos.Controllers
             params: id: id del proyecto que se quiere obtener
         */
         [HttpGet("{id}")]
+        [Authorize]
         //GET :/Proyecto/:id
         public async Task<ActionResult<ProyectoDTO>> GetProyecto(int id)
         {
@@ -45,6 +47,7 @@ namespace TrackProyectos.Controllers
             params: id: id del proyecto que se quiere obtener
         */
         [HttpGet("byProgramador/{id}")]
+        [Authorize]
         //GET :/Proyecto/byProgramador/:id
         public async Task<ActionResult<IEnumerable<ProyectoDTO>>> GetProyectosByProgramador(int id)
         {
@@ -64,6 +67,7 @@ namespace TrackProyectos.Controllers
             Crea un nuevo proyecto
         */
         [HttpPost]
+        [Authorize]
         //POST :/Proyecto/
         public async Task<ActionResult<ProyectoDTO>> PostProyecto(ProyectoDTO proyectoDTO)
         {
@@ -81,6 +85,7 @@ namespace TrackProyectos.Controllers
             params: id: id del proyecto que se quiere editar
         */
         [HttpPut("{id}")]
+        [Authorize]
         public async Task<IActionResult> PutProyecto(int id, ProyectoDTO proyectoDTO)
         {
             var proyecto = _mapper.Map<Proyecto>(proyectoDTO);
@@ -105,7 +110,8 @@ namespace TrackProyectos.Controllers
         */
         // DELETE: Proyecto/id
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ProyectoDTO>> DeleteBankAccount(int id)
+        [Authorize]
+        public async Task<ActionResult<ProyectoDTO>> DeleteProyecto(int id)
         {
             var proyecto = await _context.Proyectos.FindAsync(id);
             if (proyecto == null)

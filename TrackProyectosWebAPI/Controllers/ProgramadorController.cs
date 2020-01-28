@@ -1,6 +1,7 @@
 
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TrackProyectosWebAPI.DTOs;
@@ -21,7 +22,7 @@ namespace TrackProyectos.Controllers
             _mapper = mapper;
         }
 
-
+        [Authorize]
         [HttpGet("{id}")]
         //GET :/Programador/:id
         public async Task<ActionResult<ProgramadorDTO>> GetProgramador(int id)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TrackProyectosWebAPI.DTOs;
@@ -28,6 +29,7 @@ namespace TrackProyectos.Controllers
         /*
             Crea un nuevo nuevas horas trabajadas
         */
+        [Authorize]
         [HttpPost]
         //POST :/Hora/
         public async Task<ActionResult<HoraDTO>> PostHora(HoraDTO horaDTO)
