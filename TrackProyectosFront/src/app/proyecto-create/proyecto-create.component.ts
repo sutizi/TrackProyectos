@@ -31,7 +31,7 @@ export class ProyectoCreateComponent implements OnInit {
     this.objtempemp.programadorID=userId;
 
     this.restApi.saveProyecto(this.objtempemp).subscribe(res=>{
-        alert("Project Added successfully");
+        alert("Proyecto agregado");
         this.router.navigate(['/proyecto-list'])
         })
   }

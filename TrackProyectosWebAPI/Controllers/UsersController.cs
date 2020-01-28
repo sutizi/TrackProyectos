@@ -92,6 +92,9 @@ namespace TrackProyectos.Controllers
                 return BadRequest(new {message = "El email especificado ya se encuentra regisrado"});
             }
 
+             // crear usuario	
+            _userService.Create(usuario, nuevoDTO.Password);	
+        
             return Ok();
             }
 

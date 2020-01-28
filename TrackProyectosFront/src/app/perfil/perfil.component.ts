@@ -58,7 +58,7 @@ export class PerfilComponent implements OnInit {
     this.nuevo.password = regForm.value.password;
 
     this.restApi.actualizarUsuario(this.nuevo).subscribe(res=>{
-        alert("Project Added successfully");
+        alert("Usuario actualizado exitosamente");
         this.router.navigate(['/proyecto-list'])
         })
     }
