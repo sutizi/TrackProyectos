@@ -25,12 +25,12 @@
             #username="ngModel"
           />
           <div class="alert-danger" *ngIf="f.submitted && username.invalid">
-            <div *ngIf="username.errors.required">Username is required</div>
+            <div *ngIf="username.errors.required">El username es requerido</div>
             <div *ngIf="username.errors.minlength">
-              Username must be at least 3 characters
+              El username debe ser de al menos 3 caracteres
             </div>
             <div *ngIf="username.errors.maxlength">
-              Username must be at most 20 characters
+              El username no pude tener mas de 20 caracteres
             </div>
           </div>
         </div>
@@ -46,9 +46,9 @@
             #email="ngModel"
           />
           <div class="alert-danger" *ngIf="f.submitted && email.invalid">
-            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.required">El email es requerido</div>
             <div *ngIf="email.errors.email">
-              Email must be a valid email address
+              La direccion de email ingresada no es valida
             </div>
           </div>
         </div>
@@ -64,9 +64,9 @@
             #password="ngModel"
           />
           <div class="alert-danger" *ngIf="f.submitted && password.invalid">
-            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.required">El password es requerido</div>
             <div *ngIf="password.errors.minlength">
-              Password must be at least 6 characters
+              El password debe ser de al menos 6 caracteres
             </div>
           </div>
         </div>
@@ -75,12 +75,12 @@
         </div>
   
         <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-          Signup failed!<br />{{ errorMessage }}
+          {{ errorMessage }}
         </div>
       </form>
   
       <div class="alert alert-success" *ngIf="isSuccessful">
-        Your registration is successful!
+        Su nuevo usuario fue registrado correctamente
         <div class="form-group">
           <a [routerLink]="['/login']" class="btn btn-info">Comenzar</a>
         </div>

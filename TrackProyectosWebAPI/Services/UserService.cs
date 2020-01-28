@@ -34,15 +34,14 @@ namespace TrackProyectosWebAPI.Services
 
             var user = _context.Users.SingleOrDefault(x => x.Username == username);
 
-            // check if username exists
+            //Controlo que el usuario exista
             if (user == null)
                 return null;
 
-            // check if password is correct
+            //Verifico el passord
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
                 return null;
 
-            // authentication successful
             return user;
         }
 
@@ -58,13 +57,6 @@ namespace TrackProyectosWebAPI.Services
 
         public User Create(User user, string password)
         {
-            // validation
-            if (string.IsNullOrWhiteSpace(password))
-                throw new AppException("Password is required");
-
-            if (_context.Users.Any(x => x.Username == user.Username))
-                throw new AppException("Username \"" + user.Username + "\" is already taken");
-
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(password, out passwordHash, out passwordSalt);
 
@@ -73,7 +65,6 @@ namespace TrackProyectosWebAPI.Services
 
             _context.Users.Add(user);
             _context.SaveChanges();
-
             
             //Al crear un usuario se crea un programador con el mismo ID
             Programador programador = new Programador();
@@ -82,37 +73,6 @@ namespace TrackProyectosWebAPI.Services
             _context.SaveChanges();
 
             return user;
-        }
-
-        public void Update(User userParam, string password = null)
-        {
-            var user = _context.Users.Find(userParam.Id);
-
-            if (user == null)
-                throw new AppException("User not found");
-
-            // update username if it has changed
-            if (!string.IsNullOrWhiteSpace(userParam.Username) && userParam.Username != user.Username)
-            {
-                // throw error if the new username is already taken
-                if (_context.Users.Any(x => x.Username == userParam.Username))
-                    throw new AppException("Username " + userParam.Username + " is already taken");
-
-                user.Username = userParam.Username;
-            }
-
-            // update password if provided
-            if (!string.IsNullOrWhiteSpace(password))
-            {
-                byte[] passwordHash, passwordSalt;
-                CreatePasswordHash(password, out passwordHash, out passwordSalt);
-
-                user.PasswordHash = passwordHash;
-                user.PasswordSalt = passwordSalt;
-            }
-
-            _context.Users.Update(user);
-            _context.SaveChanges();
         }
 
         public void Delete(int id)
@@ -125,7 +85,30 @@ namespace TrackProyectosWebAPI.Services
             }
         }
 
-        // private helper methods
+        public void Update(User userParam, string password = null)
+        {
+            var user = _context.Users.Find(userParam.Id);
+
+            if (user == null)
+                throw new AppException("Error: usuario no encontrado");
+            
+            user.Username = userParam.Username;
+    
+            //Se actualiza el password
+            byte[] passwordHash, passwordSalt;
+            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            //Se actualliza el mail
+            user.Email = userParam.Email;
+
+            _context.Users.Update(user);
+            _context.SaveChanges();
+        }
+
+
 
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {

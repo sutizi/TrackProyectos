@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using TrackProyectosWebApi.DTOs;
 using TrackProyectosWebAPI.DTOs;
 using TrackProyectosWebAPI.Models.Users;
 using TrackProyectosWebAPI.Services;
 using WebApi.Helpers;
+using System.Linq;
 
 namespace TrackProyectos.Controllers
 {
@@ -26,25 +25,28 @@ namespace TrackProyectos.Controllers
         private IMapper _mapper;
         private readonly AppSettings _appSettings;
 
-        public UsersController(
-            IUserService userService,
-            IMapper mapper,
-            IOptions<AppSettings> appSettings)
+        private readonly APIDBContext _context;
+
+        public UsersController(IUserService userService, IMapper mapper, IOptions<AppSettings> appSettings, APIDBContext context)
         {
             _userService = userService;
             _mapper = mapper;
             _appSettings = appSettings.Value;
+            _context = context;
         }
-
+        
+        /*
+        * Permite autenticar al usuaioDTO verificando usuario y contraseña
+        */
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]AuthenticateModelDTO modelParam)
+        public IActionResult Authenticate([FromBody]AuthenticateDTO usuarioDTO)
         {
-            var model = _mapper.Map<AuthenticateModel>(modelParam);
-            var user = _userService.Authenticate(model.Username, model.Password);
+            var usuarioModel = _mapper.Map<AuthenticateModel>(usuarioDTO);
+            var usuario = _userService.Authenticate(usuarioModel.Username, usuarioModel.Password);
 
-            if (user == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
+            if (usuario == null)
+                return BadRequest(new { message = "Usuario y/o contraseña incorectos" });
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
@@ -52,7 +54,7 @@ namespace TrackProyectos.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
+                    new Claim(ClaimTypes.Name, usuario.Id.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -60,78 +62,67 @@ namespace TrackProyectos.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
 
-            // return basic user info and authentication token
+            // Se retorna la informacion del usuario y su token
             return Ok(new
             {
-                Id = user.Id,
-                Username = user.Username,
+                Id = usuario.Id,
+                Username = usuario.Username,
                 Token = tokenString
             });
         }
 
+        /*
+        * Registra el nuevo usario recibido
+        */
         [AllowAnonymous]
         [HttpPost("register")]
-        public IActionResult Register([FromBody]RegisterDTO modelParam)
+        public IActionResult Register([FromBody]RegisterDTO nuevoDTO)
         {
-            var model = _mapper.Map<RegisterModel>(modelParam);
-            try
+            var usuario = _mapper.Map<User>(nuevoDTO);
+            
+           //Control: username unico
+            if(_context.Users.Any(x => x.Username == nuevoDTO.Username))
             {
-            // map model to entity
-            var user = _mapper.Map<User>(model);
-
-           // create user
-                _userService.Create(user, model.Password);
-                return Ok();
+                return BadRequest(new {message = "El usermane especificado ya no se encuentra disponible"});
             }
-            catch (AppException ex)
+
+            //Control: email unico
+            if(_context.Users.Any(x => x.Email == nuevoDTO.Email))
             {
-                // return error message if there was an exception
-                return BadRequest(new { message = ex.Message });
+                return BadRequest(new {message = "El email especificado ya se encuentra regisrado"});
             }
-        }
 
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            var users = _userService.GetAll();
-            var model = _mapper.Map<IList<UserDTO>>(users);
-            return Ok(model);
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult GetById(int id)
-        {
-            var user = _userService.GetById(id);
-            var model = _mapper.Map<UserDTO>(user);
-            return Ok(model);
-        }
-
-        [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody]UpdateDTO modelParam)
-        {
-             var model = _mapper.Map<UpdateModel>(modelParam);
-            // map model to entity and set id
-            var user = _mapper.Map<User>(model);
-            user.Id = id;
-
-            try
-            {
-                // update user 
-                _userService.Update(user, model.Password);
-                return Ok();
-            }
-            catch (AppException ex)
-            {
-                // return error message if there was an exception
-                return BadRequest(new { message = ex.Message });
-            }
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
-        {
-            _userService.Delete(id);
             return Ok();
-        }
+            }
+
+ 
+        /*
+        * Actualiza el usuario con el usuarioDTO recibido
+        */
+        [Authorize]
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody]UpdateDTO nuevoDTO)
+        {
+            var usuario = _mapper.Map<User>(nuevoDTO);
+
+            //Seteo el id al DTO
+            usuario.Id = id;
+            //Control: username unico
+
+            if(_context.Users.Any(x => x.Username == nuevoDTO.Username && x.Id!= usuario.Id))
+            {
+                return BadRequest(new {message = "El usermane especificado ya no se encuentra disponible"});
+            }
+
+            //Control: email unico
+            if(_context.Users.Any(x => x.Email == nuevoDTO.Email && x.Id!= usuario.Id))
+            {
+                return BadRequest(new {message = "El email especificado ya se encuentra regisrado"});
+            }
+
+            _userService.Update(usuario, nuevoDTO.Password);
+        
+            return Ok();
+       }
     }
 }
