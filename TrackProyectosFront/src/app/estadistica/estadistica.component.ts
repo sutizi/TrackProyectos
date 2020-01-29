@@ -12,22 +12,22 @@ export class EstadisticaComponent implements OnInit {
 
   Estadistica: any = [];
 
-  horas: Int32List = [];
+  horas: any = [];
 
   constructor(public restApi: EstadisticaService) { }
 
   ngOnInit() {
-    //Cargo las estadisticas del backend
+    //Cargo las estadisticas del backend e inicializo el grafico
 	this.loadEstadistica();
-	//Inicializo el arreglo de horas para el grafico
-	this.inicializarDatosGrafico();
-    //Inicializo el grafico
-	this.inicializarGrafico();
 }
 
   loadEstadistica() {
     return this.restApi.GetEstadistica().subscribe((data: {}) => {
-      this.Estadistica = data;
+	  this.Estadistica = data;
+	  //Inicializo el arreglo de horas para el grafico
+	  this.inicializarDatosGrafico();
+	  //Inicializo el grafico
+	  this.inicializarGrafico();
     })
   }
 
@@ -58,19 +58,24 @@ export class EstadisticaComponent implements OnInit {
 	
 	inicializarDatosGrafico()
 	{
-		//En este punnto horasDTOSemana es nulo ------------
-		/*
+		for (let i = 0; i <7; i++)
+			this.horas[i]  = 0;
 		let dia = this.Estadistica.horasDTOSemana[0].dia;
 		let i = 0;
-		this.Estadistica.horasDTOSemana.forEach(function (hora) {
+		this.Estadistica.horasDTOSemana.forEach(hora =>
+			{
 			if (dia == hora.dia)
+			{
 				this.horas[i] = this.horas[i] + hora.cantidad;
+			}
 			else
+			{
 				dia = hora.dia;
 				i++;
 				this.horas[i] = this.horas[i] + hora.cantidad;
+			}
+			});
 
-		  });*/
 	}
 
 }
