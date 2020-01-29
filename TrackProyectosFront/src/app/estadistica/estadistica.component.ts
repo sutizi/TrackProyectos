@@ -33,21 +33,23 @@ export class EstadisticaComponent implements OnInit {
 
   inicializarGrafico() {
 
+		let fechas =  this.fechasSemanaPasada();
+
 		let chart = new CanvasJS.Chart("chartContainer", {
 		animationEnabled: true,
 		exportEnabled: true,
 		title: {
-			text: "Basic Column Chart in Angular"
+			text: "Horas trabajadas en la ultima semana"
 		},
 		data: [{
 			type: "column",
 			dataPoints: [
-				{ y: this.horas[6], label: "" },//hace 6 dias
-				{ y: this.horas[5], label: "Mango" },//hace 5 dias
-				{ y: this.horas[4], label: "Orange" },//hace 4 dias
-				{ y: this.horas[3], label: "Banana" },//hace 3 dias
-				{ y: this.horas[2], label: "Pineapple" }, //hace 2 dias
-				{ y: this.horas[1], label: "Pears" },//hace 1 dia
+				{ y: this.horas[6], label: fechas[5].getDate() +"/"+ (fechas[5].getMonth()+1) +"/"+ fechas[5].getFullYear()},//hace 6 dias
+				{ y: this.horas[5], label: fechas[4].getDate() +"/"+ (fechas[4].getMonth()+1) +"/"+ fechas[4].getFullYear()},//hace 5 dias
+				{ y: this.horas[4], label: fechas[3].getDate() +"/"+ (fechas[3].getMonth()+1) +"/"+ fechas[3].getFullYear() },//hace 4 dias
+				{ y: this.horas[3], label: fechas[2].getDate() +"/"+ (fechas[2].getMonth()+1) +"/"+ fechas[2].getFullYear()},//hace 3 dias
+				{ y: this.horas[2], label: fechas[1].getDate() +"/"+ (fechas[1].getMonth()+1) +"/"+ fechas[1].getFullYear()}, //hace 2 dias
+				{ y: this.horas[1], label: fechas[0].getDate() +"/"+ (fechas[0].getMonth()+1) +"/"+ fechas[0].getFullYear()},//hace 1 dia
 				{ y: this.horas[0], label: new Date().getDate()+ "/" +new Date().getMonth() +1 +"/"+new Date().getUTCFullYear()},//hoy
 			]
 		}]
@@ -55,7 +57,7 @@ export class EstadisticaComponent implements OnInit {
 		
 	chart.render();
 	}
-	
+
 	inicializarDatosGrafico()
 	{
 		for (let i = 0; i <7; i++)
@@ -76,6 +78,28 @@ export class EstadisticaComponent implements OnInit {
 			}
 			});
 
+	}
+
+	fechasSemanaPasada(){
+		let hoy = new Date();
+		let milisegundosPorDia = 1000 * 60 * 60 * 24;
+	
+		let hace1dia = hoy.getTime() - milisegundosPorDia; 
+		let hace2dias = hoy.getTime() - (2*milisegundosPorDia); 
+		let hace3dias = hoy.getTime() - (3*milisegundosPorDia); 
+		let hace4dias = hoy.getTime() - (4*milisegundosPorDia); 
+		let hace5dias = hoy.getTime() - (5*milisegundosPorDia); 
+		let hace6dias = hoy.getTime() - (6*milisegundosPorDia); 
+
+		let fechahace1dia = new Date(hace1dia);
+		let fechahace2dias = new Date(hace2dias);
+		let fechahace3dias = new Date(hace3dias);
+		let fechahace4dias = new Date(hace4dias);
+		let fechahace5dias = new Date(hace5dias);
+		let fechahace6dias = new Date(hace6dias);
+
+		var fechasSemanaPasada = [fechahace1dia,fechahace2dias,fechahace3dias,fechahace4dias,fechahace5dias,fechahace6dias];
+		return fechasSemanaPasada;
 	}
 
 }
