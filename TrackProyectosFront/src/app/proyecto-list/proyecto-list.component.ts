@@ -3,7 +3,7 @@ import { ProyectoService } from '../_services/proyecto.service';
 import { ProyectoDTO } from '../_models/ProyectoDTO';
 import { HoraDTO } from '../_models/HoraDTO';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-proyecto-list',
@@ -23,7 +23,7 @@ export class ProyectoListComponent implements OnInit {
 
   nuevo: HoraDTO = new HoraDTO();
 
-  constructor( public restApi: ProyectoService, public actRoute: ActivatedRoute) { }
+  constructor( public restApi: ProyectoService, public actRoute: ActivatedRoute, public router: Router) { }
 
   ngOnInit() {
     this.loadProyectos();
@@ -50,12 +50,13 @@ export class ProyectoListComponent implements OnInit {
    AgregarHoras(regForm:NgForm, id){
     this.nuevo =new HoraDTO();
     this.nuevo.cantidad=parseInt(regForm.value.cantidad);
-    this.hora.dia=regForm.value.dia;
-    this.hora.descripcion=regForm.value.descripcion;
+    this.nuevo.dia=regForm.value.dia;
+    this.nuevo.descripcion=regForm.value.descripcion;
     this.nuevo.proyectoID=this.IdProyectoHoras;
     this.restApi.saveHoras(this.nuevo).subscribe(res=>{
+      this.router.navigate(['/proyecto-list'])
         alert("Horas de trabajo agregadas");
-        this.router.navigate(['/proyecto-list'])
+        
         })
     }
 

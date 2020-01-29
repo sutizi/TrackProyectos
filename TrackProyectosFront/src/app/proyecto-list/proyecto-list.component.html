@@ -68,7 +68,7 @@
           <form #hora='ngForm' (ngSubmit)="AgregarHoras(hora)" class="form-horizontal" style="width:50%"  > 
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Cantidad de horas:</label>
-            <input type="text" class="form-control" [(ngModel)]='hora.cantidad' name="cantidad" #cantidad="ngModel">
+            <input type="number" class="form-control" [(ngModel)]='hora.cantidad' name="cantidad" #cantidad="ngModel">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Dia:</label>
@@ -76,12 +76,12 @@
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Descripcion:</label>
-            <textarea class="form-control" [(ngModel)]='hora.descripcion' name="descripcion" #descripcion="ngModel"></textarea>
+            <textarea type="text" class="form-control" [(ngModel)]='hora.descripcion' name="descripcion" #descripcion="ngModel"></textarea>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" style="margin: 10px" (click)= "AgregarHoras(hora)" >Agregar</button>
+        <button type="button" class="btn btn-primary" style="margin: 10px" (click)= "AgregarHoras(hora)" data-dismiss="modal">Agregar</button>
         <button type="button" class="btn btn-secondary" style="margin: 10px" (click)="cancel()" data-dismiss="modal">Cancelar</button>
       </div>
     </div>
