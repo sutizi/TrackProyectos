@@ -13,6 +13,8 @@ import { ActivatedRoute } from '@angular/router';
 export class ProyectoListComponent implements OnInit {
   [x: string]: any;
 
+  IdProyectoHoras: any;
+
   Proyecto: any = [];
 
   id = this.actRoute.snapshot.params['id'];
@@ -41,20 +43,24 @@ export class ProyectoListComponent implements OnInit {
     }
   }  
 
+  getProyectoId(id){
+    this.IdProyectoHoras=id;
+  }
 
-   AgregarHoras(regForm:NgForm){
-    var item = JSON.parse(localStorage.getItem('currentUser'));
+   AgregarHoras(regForm:NgForm, id){
     this.nuevo =new HoraDTO();
     this.nuevo.cantidad=parseInt(regForm.value.cantidad);
-    //this.hora.dia=regForm.value.dia;
-   // this.hora.descripcion=regForm.value.descripcion;
-    this.nuevo.proyectoID=14;
-    console.log("........................." + this.id);
-   
+    this.hora.dia=regForm.value.dia;
+    this.hora.descripcion=regForm.value.descripcion;
+    this.nuevo.proyectoID=this.IdProyectoHoras;
     this.restApi.saveHoras(this.nuevo).subscribe(res=>{
-        alert("Project Added successfully");
+        alert("Horas de trabajo agregadas");
         this.router.navigate(['/proyecto-list'])
         })
+    }
+
+    cancel() {
+      this.router.navigate(['/proyecto-list'])
     }
   }
 

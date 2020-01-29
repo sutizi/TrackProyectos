@@ -27,7 +27,7 @@
               <th scope="col">Descripcion</th>
               <th scope="col">Fecha de Inicio</th>
               <th scope="col">Fecha de Finalizacion</th>
-              <th scope="col">Link</th>
+              <th scope="col">Link / Ubicacion</th>
               <th scope="col">Accion</th>
             </tr>
           </thead>
@@ -41,7 +41,7 @@
               <td>
                 <a class="btn btn-outline-primary btn-sm" style="margin: 5px" href="/proyecto-edit/{{proyecto.id}}" role="button">Editar</a>
                 <a class="btn btn-outline-danger btn-sm" style="margin: 5px" (click)="deleteProyecto(proyecto.id)" role="button">Eliminar</a>
-                <button type="button" class="btn btn-outline-dark btn-sm" style="margin: 5px" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">+ Horas</button>
+                <button type="button" class="btn btn-outline-dark btn-sm" style="margin: 5px" (click)="getProyectoId(proyecto.id)" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo" >+ Horas</button>
               </td>
             </tr>
           </tbody>
@@ -68,21 +68,21 @@
           <form #hora='ngForm' (ngSubmit)="AgregarHoras(hora)" class="form-horizontal" style="width:50%"  > 
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Cantidad de horas:</label>
-            <input type="text" class="form-control" id="recipient-name" [(ngModel)]='hora.cantidad' name="cantidad" #cantidad="ngModel">
+            <input type="text" class="form-control" [(ngModel)]='hora.cantidad' name="cantidad" #cantidad="ngModel">
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Dia:</label>
-            <input type="date" class="form-control" id="recipient-name">
+            <input type="date" class="form-control" [(ngModel)]='hora.dia' name="dia" #dia="ngModel">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Descripcion:</label>
-            <textarea class="form-control" id="message-text"></textarea>
+            <textarea class="form-control" [(ngModel)]='hora.descripcion' name="descripcion" #descripcion="ngModel"></textarea>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary"(click)="AgregarHoras(hora)">Agregar</button>
+        <button type="button" class="btn btn-primary" style="margin: 10px" (click)= "AgregarHoras(hora)" >Agregar</button>
+        <button type="button" class="btn btn-secondary" style="margin: 10px" (click)="cancel()" data-dismiss="modal">Cancelar</button>
       </div>
     </div>
   </div>

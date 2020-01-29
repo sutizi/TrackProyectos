@@ -3,33 +3,32 @@
       <h3 class="mb-3 text-center">Actualizar Proyecto</h3>
   
       <div class="form-group">
-        <input type="text" [(ngModel)]="proyectoData.nombre" class="form-control" placeholder="Nombre">
+        <small id="nombre" class="form-text text-muted">Nombre</small>
+        <input type="text" [(ngModel)]="proyectoData.nombre" class="form-control">
       </div>
   
       <div class="form-group">
-        <input type="text" [(ngModel)]="proyectoData.descripcion" class="form-control" placeholder="Descripcion">
+        <small id="descripcion" class="form-text text-muted">Descripcion</small>
+        <input type="text" [(ngModel)]="proyectoData.descripcion" class="form-control" >
       </div>
   
       <div class="row">
         <div class="col">
           <div class="form-group">
-            <input type="text" [(ngModel)]="proyectoData.fechaInicio" class="form-control" placeholder="Fecha de Inicio">
-            <small id="fechaInicio" class="form-text text-muted">
-              seleccione fecha de inicio
-             </small>
+            <small id="fechaInicio" class="form-text text-muted">Fecha de Inicio</small>
+            <input type="text" [(ngModel)]="proyectoData.fechaInicio" class="form-control">
           </div>
         </div>
         <div class="col">
           <div class="form-group">
-            <input type="text" [(ngModel)]="proyectoData.fechaFinalizacion" class="form-control" placeholder="Fecha de Finalizacion">
-            <small id="fechaFinalizacion" class="form-text text-muted">
-              seleccione fecha de finalizacion
-             </small>
+            <small id="fechaFinalizacion" class="form-text text-muted">Fecha de Finalizacion</small>
+            <input type="text" [(ngModel)]="proyectoData.fechaFinalizacion" class="form-control">
           </div>
         </div>
       </div>
 
       <div class="form-group">
+        <small id="link" class="form-text text-muted">Link</small>
         <input type="text" [(ngModel)]="proyectoData.link" class="form-control"  placeholder="Link o Ubicacion">
       </div>
   
