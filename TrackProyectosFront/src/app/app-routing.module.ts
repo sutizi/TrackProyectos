@@ -13,14 +13,14 @@ import { ProyectoListComponent } from './proyecto-list/proyecto-list.component';
 import { AuthGuard } from './_helpers/auth.guard';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent, canActivate:[AuthGuard] },
+  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'perfil', component: PerfilComponent },
-  { path: 'estadistica', component: EstadisticaComponent },
-  { path: 'proyecto-create', component: ProyectoCreateComponent },
-  { path: 'proyecto-list', component: ProyectoListComponent },
-  { path: 'proyecto-edit/:id', component: ProyectoEditComponent },  
+  { path: 'estadistica', component: EstadisticaComponent, canActivate:[AuthGuard]},
+  { path: 'proyecto-create', component: ProyectoCreateComponent, canActivate:[AuthGuard] },
+  { path: 'proyecto-list', component: ProyectoListComponent, canActivate:[AuthGuard] },
+  { path: 'proyecto-edit/:id', component: ProyectoEditComponent, canActivate:[AuthGuard] },  
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
