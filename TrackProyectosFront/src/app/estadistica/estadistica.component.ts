@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EstadisticaService } from '../_services/estadistica.service';
+import * as CanvasJS from './canvasjs.min';
+import { Chart } from 'canvasjs';
 
 @Component({
   selector: 'app-estadistica',
@@ -10,16 +12,65 @@ export class EstadisticaComponent implements OnInit {
 
   Estadistica: any = [];
 
+  horas: Int32List = [];
+
   constructor(public restApi: EstadisticaService) { }
 
   ngOnInit() {
-    this.loadEstadistica();
-  }
+    //Cargo las estadisticas del backend
+	this.loadEstadistica();
+	//Inicializo el arreglo de horas para el grafico
+	this.inicializarDatosGrafico();
+    //Inicializo el grafico
+	this.inicializarGrafico();
+}
 
   loadEstadistica() {
     return this.restApi.GetEstadistica().subscribe((data: {}) => {
       this.Estadistica = data;
     })
   }
+
+  inicializarGrafico() {
+
+		let chart = new CanvasJS.Chart("chartContainer", {
+		animationEnabled: true,
+		exportEnabled: true,
+		title: {
+			text: "Basic Column Chart in Angular"
+		},
+		data: [{
+			type: "column",
+			dataPoints: [
+				{ y: this.horas[6], label: "" },//hace 6 dias
+				{ y: this.horas[5], label: "Mango" },//hace 5 dias
+				{ y: this.horas[4], label: "Orange" },//hace 4 dias
+				{ y: this.horas[3], label: "Banana" },//hace 3 dias
+				{ y: this.horas[2], label: "Pineapple" }, //hace 2 dias
+				{ y: this.horas[1], label: "Pears" },//hace 1 dia
+				{ y: this.horas[0], label: new Date().getDate()+ "/" +new Date().getMonth() +1 +"/"+new Date().getUTCFullYear()},//hoy
+			]
+		}]
+	});
+		
+	chart.render();
+	}
+	
+	inicializarDatosGrafico()
+	{
+		//En este punnto horasDTOSemana es nulo ------------
+		/*
+		let dia = this.Estadistica.horasDTOSemana[0].dia;
+		let i = 0;
+		this.Estadistica.horasDTOSemana.forEach(function (hora) {
+			if (dia == hora.dia)
+				this.horas[i] = this.horas[i] + hora.cantidad;
+			else
+				dia = hora.dia;
+				i++;
+				this.horas[i] = this.horas[i] + hora.cantidad;
+
+		  });*/
+	}
 
 }

@@ -59,8 +59,8 @@ namespace TrackProyectos.Controllers
                 CantidadProyectosTermiandos = proyectos.Count(x => x.FechaFinalizacion != null && x.FechaFinalizacion <= DateTime.Today),
                 HorasTotales = horas.Sum(x => x.Cantidad),
                 HorasMes = horas.Where(x => x.Dia.Month == DateTime.Today.Month).Sum(x => x.Cantidad),
-                HorasDTOSemana = _mapper.Map<IEnumerable<Hora>, IList<HoraDTO>> (horas.Where(x => x.Dia >= primerDia && x.Dia <= hoy))
-                
+                HorasSemana = horas.Where(x => x.Dia >= primerDia && x.Dia <= hoy).Sum(x => x.Cantidad),
+                HorasDTOSemana = _mapper.Map<IEnumerable<Hora>, IList<HoraDTO>> (horas.Where(x => x.Dia >= primerDia && x.Dia <= hoy).OrderBy(x => x.Dia))
             };
             return estadisticaDTO;
         }

@@ -1,4 +1,8 @@
-<table class="table">
+<br><br>
+
+<h2> Resumen de proyectos</h2>
+
+<table class="table table-striped">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -28,8 +32,34 @@
       </tr>
       <tr>
         <th scope="row"></th>
-        <td></td>
-        <td></td>
+          <td>Horas trabajadas durante esta semana: </td>
+          <td>{{Estadistica.horasSemana}}</td>
       </tr>
     </tbody>
   </table>
+
+  <br><br>
+
+  <h2> Resumen de esta semana</h2>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Dia</th>
+        <th scope="col">Cantidad de horas</th>
+        <th scope="col">Descripcion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let hora of Estadistica.horasDTOSemana">
+        <td>{{hora.dia | date: 'dd/MM/yyyy'}}</td>
+        <td>{{hora.cantidad}}</td>
+        <td>{{hora.descripcion}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+ 
