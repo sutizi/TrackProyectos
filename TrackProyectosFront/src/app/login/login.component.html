@@ -54,7 +54,7 @@
         </div>
         <div class="form-group">
           <button class="btn btn-primary btn-block">
-            Login
+            Ingresar
           </button>
         </div>
         <div class="form-group">
@@ -69,6 +69,10 @@
       </form>
   
       <div class="alert alert-success" style="margin: 20px" *ngIf="isLoggedIn">
+        Bienvenido a TrackProyectos :)
+        <div class="form-group">
+          <a [routerLink]="['/proyecto-list']" class="btn btn-info"  style="margin: 10px">Comenzar</a>
+        </div> 
       </div>
     </div>
   </div>

@@ -13,6 +13,7 @@ using TrackProyectosWebAPI.Models.Users;
 using TrackProyectosWebAPI.Services;
 using WebApi.Helpers;
 using System.Linq;
+using TrackProyectosWebApi.DTOs;
 
 namespace TrackProyectos.Controllers
 {
@@ -127,5 +128,13 @@ namespace TrackProyectos.Controllers
         
             return Ok();
        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var user = _userService.GetById(id);
+            var model = _mapper.Map<UserDTO>(user);
+            return Ok(model);
+        }
     }
 }

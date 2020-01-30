@@ -30,6 +30,15 @@ actualizarUsuario(usuario): Observable<Usuario> {
     );
   }
 
+  getUsuario(): Observable<Usuario> {
+    var item = JSON.parse(localStorage.getItem('currentUser'));
+    var userId = item.id;
+    return this.http.get<Usuario>(API_URL + userId)
+    .pipe(
+      catchError(this.errorHandler)
+    );
+  }
+
   errorHandler(error) {
     let errorMessage = error.error.message;
     console.log(errorMessage);
