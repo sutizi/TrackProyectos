@@ -1,12 +1,15 @@
 <div id="app">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a href="#" class="navbar-brand">Track Proyectos</a>
+      <a class="navbar-brand">Track Proyectos</a>
       <ul class="navbar-nav mr-auto" routerLinkActive="active">
         <li class="nav-item">
           <a href="/home" class="nav-link" routerLink="home">Home </a>
         </li>
         <li class="nav-item">
           <a href="/proyecto-list" class="nav-link" [routerLink]="['/proyecto-list']">Mis Proyectos </a>
+        </li>
+        <li class="nav-item">
+          <a href="/estadistica" class="nav-link" [routerLink]="['/estadistica']">Mis Estadisticas </a>
         </li>
       </ul>
   
