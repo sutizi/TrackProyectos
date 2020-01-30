@@ -32,15 +32,15 @@ h3 {
 
 .container {
   margin: 0 auto;
-  width: 100vw;
-  height: 100vw;
+  width: 100%;
+  height: 100%;
   display: -webkit-box;
   display: flex;
   -webkit-box-pack: center;
           justify-content: center;
   -webkit-box-align: center;
           align-items: top;
-  background: url(https://previews.123rf.com/images/grinvalds/grinvalds1710/grinvalds171000023/87944408-persona-en-la-oficina-trabajando-en-la-computadora-port%C3%A1til-y-la-computadora.jpg);
+  background: url(https://es.justexw.com/wp-content/uploads/sites/2/organizar-tareas-con-excel-de-manera-sencilla.jpg);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -75,11 +75,11 @@ h3 {
 
 @media (min-width: 992px) {
   .item {
-    width: 100vw;
+    width: 100%;
   }
 }
 @media (min-width: 1200px) {
   .item {
-    width: 100vw;
+    width: 100%;
   }
 }
