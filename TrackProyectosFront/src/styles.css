@@ -49,3 +49,58 @@ input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
 @keyframes fadeinout {
   50% { opacity: 1; }
 }
+#footer {
+    background-color: #3c3d41;
+	color: white;
+	position: fixed;
+    padding-top: 1%;
+	margin-top : 1%;
+	bottom:0;
+	width:100%;
+	 
+}
+
+#footer .row {
+    margin-bottom: 4px;
+}
+
+#footer .navbar-brand {
+    margin-top: 45%;
+    height: 65%;
+}
+
+#footer ul {
+    list-style-type: none;
+    padding-left: 0;
+    line-height: 1.7;
+}
+
+#footer h5 {
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+#footer h2 a{
+    font-size: 50px;
+    text-align: center;
+    color: #fff;
+}
+
+#footer a {
+    color: #d2d1d1;
+    text-decoration: none;
+}
+
+#footer a:hover,
+#footer a:focus {
+    text-decoration: none;
+    color: white;
+}
+
+@media screen and (max-width: 767px) {
+    #footer {
+        text-align: center;
+    }
+}

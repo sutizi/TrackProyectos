@@ -1,7 +1,5 @@
 <div class="container custom-container-2">
 
-  <br>
-
     <!-- cuando no hay proyectos -->
     <div class="card"  *ngIf="Proyecto.length == 0">
       <div class="card-header">
@@ -19,8 +17,8 @@
 
       <a class="btn btn-primary" style="margin: 10px" href="/proyecto-create" role="button">Crear Proyecto</a>
   
-      <div class="col-md-12">
-        <table class="table">
+      <div class="col-md-12" style="overflow: auto;">
+        <table class="table" >
           <thead>
             <tr>
               <th scope="col">Nombre</th>
