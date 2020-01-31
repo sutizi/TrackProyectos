@@ -36,7 +36,7 @@ namespace TrackProyectos.Controllers
         {
             var proyecto = await _context.Proyectos.FindAsync(id);
 
-            if (proyecto == null)
+            if (proyecto == null || proyecto.IsDeleted)
                 return NotFound();
 
             return _mapper.Map<ProyectoDTO>(proyecto);
@@ -57,7 +57,7 @@ namespace TrackProyectos.Controllers
             {
                 return NotFound();
             }
-            var proyectos = _mapper.Map<IEnumerable<Proyecto>, IEnumerable<ProyectoDTO>>(programador.Proyectos).ToList();
+            var proyectos = _mapper.Map<IEnumerable<Proyecto>, IEnumerable<ProyectoDTO>>(programador.Proyectos.Where(x => !x.IsDeleted)).ToList();
 
             return proyectos;
         }
@@ -72,6 +72,8 @@ namespace TrackProyectos.Controllers
         public async Task<ActionResult<ProyectoDTO>> PostProyecto(ProyectoDTO proyectoDTO)
         {
             var proyecto = _mapper.Map<Proyecto>(proyectoDTO);
+
+            proyecto.IsDeleted = false;
 
             _context.Proyectos.Add(proyecto);
 
@@ -105,7 +107,7 @@ namespace TrackProyectos.Controllers
         }
 
         /*
-            Elimina el proyecto especificado y lo retorna
+            Elimina el proyecto (softdelete) especificado y lo retorna
             params: id: id del proyecto que se desea eliminar
         */
         // DELETE: Proyecto/id
@@ -119,7 +121,8 @@ namespace TrackProyectos.Controllers
                 return NotFound();
             }
 
-            _context.Proyectos.Remove(proyecto);
+            proyecto.IsDeleted = true;
+
             await _context.SaveChangesAsync();
 
             return _mapper.Map<ProyectoDTO>(proyecto);

@@ -33,5 +33,7 @@ namespace TrackProyectosWebAPI.Models
 
         [ForeignKey("Programador")]
         public int ProgramadorID { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }
