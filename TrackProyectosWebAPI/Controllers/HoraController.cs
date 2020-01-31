@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,6 +36,16 @@ namespace TrackProyectos.Controllers
         public async Task<ActionResult<HoraDTO>> PostHora(HoraDTO horaDTO)
         {
             var hora = _mapper.Map<Hora>(horaDTO);
+
+            if(hora.Cantidad <= 0 || hora.Cantidad > 24)
+            {
+                return BadRequest(new {message = "La cantidad de horas debe ser mayor a cero y menor a 24"});
+            }
+
+            if(hora.Dia > DateTime.Now)
+            {
+                return BadRequest(new {message = "La fecha no puede ser posterior a hoy"});
+            }
 
             _context.Horas.Add(hora);
 

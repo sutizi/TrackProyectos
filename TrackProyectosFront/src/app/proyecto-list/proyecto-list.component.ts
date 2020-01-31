@@ -17,6 +17,10 @@ export class ProyectoListComponent implements OnInit {
 
   Proyecto: any = [];
 
+  errorMessage = 'Error';
+
+  falla = false;
+
   id = this.actRoute.snapshot.params['id'];
 
   @Input() hora: HoraDTO = new HoraDTO();
@@ -56,9 +60,12 @@ export class ProyectoListComponent implements OnInit {
     this.restApi.saveHoras(this.nuevo).subscribe(res=>{
       this.router.navigate(['/proyecto-list'])
         alert("Horas de trabajo agregadas");
-        
-        })
-    }
+        },
+      err => {
+        this.falla = true;
+        this.errorMessage = err.message;
+      });
+   }
 
     cancel() {
       this.router.navigate(['/proyecto-list'])
