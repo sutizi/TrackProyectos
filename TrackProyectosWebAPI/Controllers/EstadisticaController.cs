@@ -44,7 +44,7 @@ namespace TrackProyectos.Controllers
                 return NotFound();
             }
             
-            var proyectos = programador.Proyectos.Where(x => x.IsDeleted).ToList();
+            var proyectos = programador.Proyectos.Where(x => !x.IsDeleted).ToList();
 
             //Unifico todas las horas en una sola lista
             var horas = programador.GetHoras(proyectos);

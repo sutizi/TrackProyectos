@@ -48,7 +48,7 @@ export class PerfilComponent implements OnInit {
         this.reloadPage();
       },
       err => {
-        this.errorMessage = err.error.message;
+        this.errorMessage = err;
         this.isLoginFailed = true;
       }
     );

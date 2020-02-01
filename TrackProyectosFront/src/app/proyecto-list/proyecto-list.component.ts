@@ -60,10 +60,11 @@ export class ProyectoListComponent implements OnInit {
     this.restApi.saveHoras(this.nuevo).subscribe(res=>{
       this.router.navigate(['/proyecto-list'])
         alert("Horas de trabajo agregadas");
+    this.falla = false;
         },
       err => {
         this.falla = true;
-        this.errorMessage = err.message;
+        this.errorMessage = err;
       });
    }
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EstadisticaService } from '../_services/estadistica.service';
 import * as CanvasJS from './canvasjs.min';
-import { Chart } from 'canvasjs';
 
 @Component({
   selector: 'app-estadistica',
@@ -38,9 +37,6 @@ export class EstadisticaComponent implements OnInit {
 		let chart = new CanvasJS.Chart("chartContainer", {
 		animationEnabled: true,
 		exportEnabled: true,
-		title: {
-			text: "Horas trabajadas en la ultima semana"
-		},
 		data: [{
 			type: "column",
 			dataPoints: [

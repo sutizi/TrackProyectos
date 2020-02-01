@@ -13,7 +13,7 @@ import { NgForm } from '@angular/forms';
 export class ProyectoCreateComponent implements OnInit {
   objtempemp:ProyectoDTO;
   isDateFailed = false;
-  errorMessage= "La fecha de inicio debe ser anterior a su finalizacion. Por favor corriga el error. (hardcodeado)";
+  errorMessage= "Error";
   
   constructor( public restApi: ProyectoService, public router: Router) {}
 
@@ -39,10 +39,8 @@ export class ProyectoCreateComponent implements OnInit {
           this.router.navigate(['/proyecto-list']);
         },
         err => {
-          this.isDateFailed = true; 
-          this.errorMessage = err.error.message; 
-          console.log(err.error.message);
-          console.log("..........................."+this.errorMessage);
+          this.isDateFailed = true;
+          this.errorMessage = err;
         }
       );
   }

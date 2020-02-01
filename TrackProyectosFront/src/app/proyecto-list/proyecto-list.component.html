@@ -14,7 +14,7 @@
             <th scope="col">Descripcion</th>
             <th scope="col">Fecha de Inicio</th>
             <th scope="col">Fecha de Finalizacion</th>
-            <th scope="col">Link / Ubicacion</th>
+            <th scope="col">Repositorio</th>
             <th scope="col">Accion</th>
           </tr>
         </thead>
@@ -24,7 +24,7 @@
             <td>{{proyecto.descripcion}}</td>
             <td>{{proyecto.fechaInicio | date: 'dd/MM/yyyy'}}</td>
             <td>{{proyecto.fechaFinalizacion | date: 'dd/MM/yyyy'}}</td>
-            <td>{{proyecto.link}}</td>
+            <td><a href= {{proyecto.link}} target="_blank">Link</a></td>
             <td>
               <a class="btn btn-outline-primary btn-sm" style="margin: 5px" href="/proyecto-edit/{{proyecto.id}}"
                 role="button">Editar</a>
@@ -89,8 +89,9 @@
       <div class="modal-footer">
         <div class="form-group">
         <button type="button" class="btn btn-primary" (click)="AgregarHoras(hora)"
-          data-dismiss="modal">Agregar</button>
+        *ngIf="! hora.falla" data-dismiss="modal">Agregar</button>
           </div>
+          <span class="name-error" ng-show="errorMessage" ng-bind="errorMessage"></span>
           <div class="form-group">
             <div
               class="alert alert-danger"
