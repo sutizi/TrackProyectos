@@ -75,11 +75,18 @@ namespace TrackProyectos.Controllers
 
             proyecto.IsDeleted = false;
 
+            //Control: fecha de inicio debe ser menor que fecha de finalizacion
+            var result = System.DateTime.Compare(proyecto.FechaInicio, proyecto.FechaFinalizacion);
+            if(result>0)
+            {
+                return BadRequest(new {message = "La fecha de inicio debe ser anterior a su finalizacion"});
+            }
+
             _context.Proyectos.Add(proyecto);
 
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok();
         }
 
         /*
@@ -91,6 +98,13 @@ namespace TrackProyectos.Controllers
         public async Task<IActionResult> PutProyecto(int id, ProyectoDTO proyectoDTO)
         {
             var proyecto = _mapper.Map<Proyecto>(proyectoDTO);
+
+           //Control: fecha de inicio debe ser menor que fecha de finalizacion
+            var result = System.DateTime.Compare(proyecto.FechaInicio, proyecto.FechaFinalizacion);
+            if(result>0)
+            {
+                return BadRequest(new {message = "La fecha de inicio debe ser anterior a su finalizacion"});
+            }
 
             _context.Entry(proyecto).State = EntityState.Modified;
 

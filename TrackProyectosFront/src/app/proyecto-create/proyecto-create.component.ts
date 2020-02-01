@@ -12,6 +12,8 @@ import { NgForm } from '@angular/forms';
   
 export class ProyectoCreateComponent implements OnInit {
   objtempemp:ProyectoDTO;
+  isDateFailed = false;
+  errorMessage= "La fecha de inicio debe ser anterior a su finalizacion. Por favor corriga el error. (hardcodeado)";
   
   constructor( public restApi: ProyectoService, public router: Router) {}
 
@@ -30,10 +32,19 @@ export class ProyectoCreateComponent implements OnInit {
     this.objtempemp.link=regForm.value.link;
     this.objtempemp.programadorID=userId;
 
-    this.restApi.saveProyecto(this.objtempemp).subscribe(res=>{
-        alert("Proyecto agregado");
-        this.router.navigate(['/proyecto-list'])
-        })
+    this.restApi.saveProyecto(this.objtempemp).subscribe(
+        () => {
+          alert("Proyecto agregado");
+          this.isDateFailed = false;
+          this.router.navigate(['/proyecto-list']);
+        },
+        err => {
+          this.isDateFailed = true; 
+          this.errorMessage = err.error.message; 
+          console.log(err.error.message);
+          console.log("..........................."+this.errorMessage);
+        }
+      );
   }
 
   cancel() {

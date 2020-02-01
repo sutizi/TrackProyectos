@@ -1,9 +1,8 @@
 <div class="col-md-12">
   <div class="container-fluid" align= "center" >
       <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" width="192" height="192"
-        class="profile-img-card"
+      id="profile-img" src="assets/lock.jpg" width="120" height="130" style="margin: 20px"
+      class="profile-img-card" *ngIf="!isLoggedIn"
       />
       <form
         *ngIf="!isLoggedIn"
@@ -67,7 +66,11 @@
           </div>
         </div>
       </form>
-  
+
+      <img
+        id="profile-img" src="assets/unlock.jpg" width="120" height="130"style="margin: 20px" class="profile-img-card"
+          *ngIf="isLoggedIn"
+      />
       <div class="alert alert-success" style="margin: 20px" *ngIf="isLoggedIn">
         Bienvenido a TrackProyectos :)
         <div class="form-group">

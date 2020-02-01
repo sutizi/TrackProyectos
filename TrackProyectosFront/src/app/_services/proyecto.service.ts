@@ -68,7 +68,6 @@ export class ProyectoService {
 
   errorHandler(error) {
     let errorMessage = error.error.message;
-    console.log(errorMessage);
     return throwError(errorMessage);
   }
 }

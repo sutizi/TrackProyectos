@@ -18,13 +18,14 @@ body {
 h1 {
   text-align: center;
   font-family: "Oswald", sans;
+  -webkit-text-stroke: 2px wheat;
   font-size: 4rem;
   font-weight: normal;
   line-height: 3.5rem;
 }
 
 h3 {
-  font-size: 1.35rem;
+  font-size: 1.5rem;
   line-height: 2rem;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -34,13 +35,7 @@ h3 {
   margin: 0 auto;
   width: 100%;
   height: 100%;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-          align-items: top;
-  background: url(https://es.justexw.com/wp-content/uploads/sites/2/organizar-tareas-con-excel-de-manera-sencilla.jpg);
+  background-image: url(https://s3.amazonaws.com/fjwp/blog/wp-content/uploads/2016/08/18075944/10-Jobs-that-Pay-Well-AND-Let-You-Work-from-Home.jpg);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -55,7 +50,7 @@ h3 {
 .btn {
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-top: 1rem;
+  margin: 20px;
   display: inline-block;
   line-height: 1.25rem;
   text-align: center;

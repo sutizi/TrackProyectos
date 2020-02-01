@@ -41,7 +41,6 @@ actualizarUsuario(usuario): Observable<Usuario> {
 
   errorHandler(error) {
     let errorMessage = error.error.message;
-    console.log(errorMessage);
     return throwError(errorMessage);
   }
 }

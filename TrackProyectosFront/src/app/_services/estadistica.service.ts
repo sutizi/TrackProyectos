@@ -33,7 +33,6 @@ export class EstadisticaService {
 
   errorHandler(error) {
     let errorMessage = error.error.message;
-    console.log(errorMessage);
     return throwError(errorMessage);
   }
 }

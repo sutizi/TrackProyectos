@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'proyecto-create', component: ProyectoCreateComponent, canActivate:[AuthGuard] },
   { path: 'proyecto-list', component: ProyectoListComponent, canActivate:[AuthGuard] },
   { path: 'proyecto-edit/:id', component: ProyectoEditComponent, canActivate:[AuthGuard] },  
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
 @NgModule({
