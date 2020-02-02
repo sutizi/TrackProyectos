@@ -42,9 +42,9 @@ namespace TrackProyectos.Controllers
                 return BadRequest(new {message = "La cantidad de horas debe ser mayor a cero y menor a 24"});
             }
 
-            if(hora.Dia > DateTime.Now)
+            if(hora.Dia == null)
             {
-                return BadRequest(new {message = "La fecha no puede ser posterior a hoy"});
+                return BadRequest(new {message = "Debe especificar la fecha"});
             }
 
             _context.Horas.Add(hora);
