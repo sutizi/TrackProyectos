@@ -16,13 +16,13 @@
         <div class="col">
           <div class="form-group">
             <small id="fechaInicio" class="form-text text-muted">Fecha de Inicio</small>
-            <input type="text" [(ngModel)]="proyectoData.fechaInicio" class="form-control">
+            <input type="date"  [ngModel]="proyectoData.fechaInicio |date: 'yyyy-MM-dd'" class="form-control" [(ngModel)]="proyectoData.fechaInicio">
           </div>
         </div>
         <div class="col">
           <div class="form-group">
             <small id="fechaFinalizacion" class="form-text text-muted">Fecha de Finalizacion</small>
-            <input type="text" [(ngModel)]="proyectoData.fechaFinalizacion" class="form-control">
+            <input type="date" [ngModel]="proyectoData.fechaFinalizacion |date: 'yyyy-MM-dd'" [(ngModel)]="proyectoData.fechaFinalizacion" class="form-control">
           </div>
         </div>
       </div>

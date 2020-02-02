@@ -1,11 +1,9 @@
 .container {
     padding-bottom : 16%;
+    padding-top : 3%;
 }
 
 .tweet-button {
-   /* display: inline-block;
-    width: 55px;
-    height: 21px;*/
-    background-image: "assets/unlock.jpg";
-  /*  background-position: 0 0;*/
+  position: relative;
+  left: 85%;
   }
