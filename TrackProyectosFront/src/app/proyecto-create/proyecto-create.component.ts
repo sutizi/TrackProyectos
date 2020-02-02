@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, TemplateRef } from '@angular/core';
 import { ProyectoService } from '../_services/proyecto.service';
 import { Router } from '@angular/router';
 import { ProyectoDTO } from '../_models/ProyectoDTO';
 import { NgForm } from '@angular/forms';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-proyecto-create',
@@ -15,9 +16,10 @@ export class ProyectoCreateComponent implements OnInit {
   isDateFailed = false;
   errorMessage= "Error";
   
-  constructor( public restApi: ProyectoService, public router: Router) {}
+  constructor( public restApi: ProyectoService, public router: Router,  private modalService: NgbModal) {}
 
    @Input() objemp: ProyectoDTO = new ProyectoDTO();
+   @ViewChild('modal', {read: false, static: true} ) modal: TemplateRef<any>;
    
    ngOnInit() { }
 
@@ -34,7 +36,8 @@ export class ProyectoCreateComponent implements OnInit {
 
     this.restApi.saveProyecto(this.objtempemp).subscribe(
         () => {
-          alert("Proyecto agregado");
+
+          this.mostrar();
           this.isDateFailed = false;
           this.router.navigate(['/proyecto-list']);
         },
@@ -47,6 +50,14 @@ export class ProyectoCreateComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['/proyecto-list'])
+  }
+
+  mostrar() {
+    this.modalService.open(this.modal);
+  }
+
+  cerrar() {
+    this.modalService.dismissAll();
   }
 
 }

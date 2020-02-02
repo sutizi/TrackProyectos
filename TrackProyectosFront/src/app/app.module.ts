@@ -18,6 +18,7 @@ import { EstadisticaComponent } from './estadistica/estadistica.component';
 import { ProyectoCreateComponent } from './proyecto-create/proyecto-create.component';
 import { ProyectoEditComponent } from './proyecto-edit/proyecto-edit.component';
 import { ProyectoListComponent } from './proyecto-list/proyecto-list.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ProyectoListComponent } from './proyecto-list/proyecto-list.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [authInterceptorProviders, ProyectoService],
   bootstrap: [AppComponent]

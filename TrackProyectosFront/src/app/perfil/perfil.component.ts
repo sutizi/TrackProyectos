@@ -1,9 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { Usuario } from '../_models/usuario';
 import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
+import { NgForm } from '@angular/forms';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -16,18 +18,17 @@ export class PerfilComponent implements OnInit {
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  roles: string[] = [];
 
   @Input() usuario: Usuario = new Usuario();
+  @ViewChild('modal', {read: false, static: true} ) modal: TemplateRef<any>;
 
   nuevo: Usuario = new Usuario();
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, public restApi: UserService, public router: Router) { }
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, public restApi: UserService, public router: Router,private modalService: NgbModal) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
     }
 
     this.restApi.getUsuario().subscribe((data: {}) => {
@@ -44,7 +45,6 @@ export class PerfilComponent implements OnInit {
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().roles;
         this.reloadPage();
       },
       err => {
@@ -56,12 +56,20 @@ export class PerfilComponent implements OnInit {
 
   actualizarUsuario(){
     this.restApi.actualizarUsuario(this.form).subscribe((data: {}) => {
-        alert("Usuario actualizado exitosamente");
-        this.router.navigate(['/proyecto-list'])
-        })
-    }
+      this.mostrar();
+      this.router.navigate(['/proyecto-list'])
+    })
+  }
 
   reloadPage() {
     window.location.reload();
+  }
+
+  mostrar() {
+    this.modalService.open(this.modal);
+  }
+
+  cerrar() {
+    this.modalService.dismissAll();
   }
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef, ViewChild } from '@angular/core';
 import { ProyectoService } from '../_services/proyecto.service';
-import { ProyectoDTO } from '../_models/ProyectoDTO';
 import { HoraDTO } from '../_models/HoraDTO';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-proyecto-list',
@@ -24,10 +24,11 @@ export class ProyectoListComponent implements OnInit {
   id = this.actRoute.snapshot.params['id'];
 
   @Input() hora: HoraDTO = new HoraDTO();
+  @ViewChild('modal', {read: false, static: true} ) modal: TemplateRef<any>;
 
   nuevo: HoraDTO = new HoraDTO();
 
-  constructor( public restApi: ProyectoService, public actRoute: ActivatedRoute, public router: Router) { }
+  constructor( public restApi: ProyectoService, public actRoute: ActivatedRoute, public router: Router,  private modalService: NgbModal) { }
 
   ngOnInit() {
     this.loadProyectos();
@@ -41,7 +42,7 @@ export class ProyectoListComponent implements OnInit {
 
   deleteProyecto(id) {
     if (window.confirm('¿Seguro que desea eliminarlo?')){
-      this.restApi.deleteProyecto(id).subscribe(data => {
+      this.restApi.deleteProyecto(id).subscribe(() => {
         this.loadProyectos()
       })
     }
@@ -51,15 +52,15 @@ export class ProyectoListComponent implements OnInit {
     this.IdProyectoHoras=id;
   }
 
-   AgregarHoras(regForm:NgForm, id){
+   AgregarHoras(regForm:NgForm){
     this.nuevo =new HoraDTO();
     this.nuevo.cantidad=parseInt(regForm.value.cantidad);
     this.nuevo.dia=regForm.value.dia;
     this.nuevo.descripcion=regForm.value.descripcion;
     this.nuevo.proyectoID=this.IdProyectoHoras;
-    this.restApi.saveHoras(this.nuevo).subscribe(res=>{
-      this.router.navigate(['/proyecto-list'])
-        alert("Horas de trabajo agregadas");
+    this.restApi.saveHoras(this.nuevo).subscribe(()=>{
+    this.router.navigate(['/proyecto-list'])
+    this.mostrar();
     this.falla = false;
         },
       err => {
@@ -71,6 +72,13 @@ export class ProyectoListComponent implements OnInit {
     cancel() {
       this.router.navigate(['/proyecto-list'])
     }
+  
+
+  mostrar() {
+    this.modalService.open(this.modal);
   }
 
-
+  cerrar() {
+    this.modalService.dismissAll();
+  }
+}
