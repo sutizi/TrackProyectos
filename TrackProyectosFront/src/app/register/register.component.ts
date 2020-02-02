@@ -1,6 +1,5 @@
 import { Component , OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
-import { observable, throwError } from 'rxjs'; 
 
 
 @Component({
@@ -25,6 +24,7 @@ export class RegisterComponent implements OnInit {
       () => {
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        this.authService.login(this.form).subscribe();
       },
       err => {
        this.errorMessage = err.error.message;
