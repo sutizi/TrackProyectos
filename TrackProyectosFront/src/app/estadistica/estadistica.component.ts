@@ -24,9 +24,13 @@ export class EstadisticaComponent implements OnInit {
     return this.restApi.GetEstadistica().subscribe((data: {}) => {
 	  this.Estadistica = data;
 	  //Inicializo el arreglo de horas para el grafico
-	  this.inicializarDatosGrafico();
-	  //Inicializo el grafico
-	  this.inicializarGrafico();
+	  //El grafico se inicializa solo si hay horas en esta semana
+	  if(this.Estadistica.horasDTOSemana !== undefined && this.Estadistica.horasSemana >0)
+	  {
+		this.inicializarDatosGrafico();
+		//Inicializo el grafico
+		this.inicializarGrafico();
+	  }
     })
   }
 
@@ -55,7 +59,7 @@ export class EstadisticaComponent implements OnInit {
 	}
 
 	inicializarDatosGrafico()
-	{
+	{		
 		for (let i = 0; i <7; i++)
 			this.horas[i]  = 0;
 		let dia = this.Estadistica.horasDTOSemana[0].dia;
@@ -73,7 +77,6 @@ export class EstadisticaComponent implements OnInit {
 				this.horas[i] = this.horas[i] + hora.cantidad;
 			}
 			});
-
 	}
 
 	fechasSemanaPasada(){

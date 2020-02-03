@@ -1,10 +1,11 @@
-<div class= "container">
-<a href="https://twitter.com/intent/tweet?text=Ya%20he%20completado%20{{Estadistica.cantidadProyectosTermiandos}}%20de%20mis%20proyectos%20en%20TrackProyectos%20">
-  <button type="button" class="btn btn-primary btn-sm, tweet-button">Compartir en twitter</button></a>
+<div class="container">
+  <a
+    href="https://twitter.com/intent/tweet?text=Ya%20he%20completado%20{{Estadistica.cantidadProyectosTermiandos}}%20de%20mis%20proyectos%20en%20TrackProyectos%20">
+    <button type="button" class="btn btn-primary btn-sm, tweet-button">Compartir en twitter</button></a>
 
-<h2> Resumen de proyectos</h2>
+  <h2> Resumen de proyectos</h2>
 
-<table class="table table-striped">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -34,8 +35,8 @@
       </tr>
       <tr>
         <th scope="row"></th>
-          <td>Horas trabajadas durante esta semana: </td>
-          <td>{{Estadistica.horasSemana}}</td>
+        <td>Horas trabajadas durante esta semana: </td>
+        <td>{{Estadistica.horasSemana}}</td>
       </tr>
     </tbody>
   </table>
@@ -44,26 +45,30 @@
 
   <h2> Resumen de esta semana</h2>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Dia</th>
-        <th scope="col">Cantidad de horas</th>
-        <th scope="col">Descripcion</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let hora of Estadistica.horasDTOSemana">
-        <td>{{hora.dia | date: 'dd/MM/yyyy'}}</td>
-        <td>{{hora.cantidad}}</td>
-        <td>{{hora.descripcion}}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div *ngIf="Estadistica.horasDTOSemana !== undefined">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Dia</th>
+          <th scope="col">Cantidad de horas</th>
+          <th scope="col">Descripcion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let hora of Estadistica.horasDTOSemana">
+          <td>{{hora?.dia | date: 'dd/MM/yyyy'}}</td>
+          <td>{{hora.cantidad}}</td>
+          <td>{{hora.descripcion}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
+  <div *ngIf="Estadistica.horasSemana == 0">
+    <h4>No hay horas trabajadas esta semana</h4>
+    <br><br><br><br><br>
+  </div>
 
   <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 
 </div>
-
- 
