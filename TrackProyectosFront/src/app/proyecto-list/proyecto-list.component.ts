@@ -23,8 +23,12 @@ export class ProyectoListComponent implements OnInit {
 
   id = this.actRoute.snapshot.params['id'];
 
+  idEliminar = 0;
+
   @Input() hora: HoraDTO = new HoraDTO();
   @ViewChild('modal', {read: false, static: true} ) modal: TemplateRef<any>;
+  @ViewChild('modalEliminar', {read: false, static: true} ) modalEliminar: TemplateRef<any>;
+  @ViewChild('modalEliminarConfirmacion', {read: false, static: true} ) modalEliminarConfirmacion: TemplateRef<any>;
 
   nuevo: HoraDTO = new HoraDTO();
 
@@ -40,12 +44,11 @@ export class ProyectoListComponent implements OnInit {
     })
   }
 
-  deleteProyecto(id) {
-    if (window.confirm('¿Seguro que desea eliminarlo?')){
-      this.restApi.deleteProyecto(id).subscribe(() => {
-        this.loadProyectos()
+  deleteProyecto() {
+      this.restApi.deleteProyecto(this.idEliminar).subscribe(() => {
+        this.loadProyectos();
+        this.mostrarEliminar();
       })
-    }
   }  
 
   getProyectoId(id){
@@ -60,7 +63,7 @@ export class ProyectoListComponent implements OnInit {
     this.nuevo.proyectoID=this.IdProyectoHoras;
     this.restApi.saveHoras(this.nuevo).subscribe(()=>{
     this.router.navigate(['/proyecto-list'])
-    this.mostrar();
+    this.mostrarModal();
     this.falla = false;
         },
       err => {
@@ -74,8 +77,17 @@ export class ProyectoListComponent implements OnInit {
     }
   
 
-  mostrar() {
+  mostrarModal() {
     this.modalService.open(this.modal);
+  }
+
+  mostrarEliminar() {
+    this.modalService.open(this.modalEliminar);
+  }
+
+  mostrarEliminarConfirmacion(id) {
+    this.modalService.open(this.modalEliminarConfirmacion);
+    this.idEliminar = id;
   }
 
   cerrar() {

@@ -28,7 +28,7 @@
             <td>
               <a class="btn btn-outline-primary btn-sm" style="margin: 5px" href="/proyecto-edit/{{proyecto.id}}"
                 role="button">Editar</a>
-              <a class="btn btn-outline-danger btn-sm" style="margin: 5px" (click)="deleteProyecto(proyecto.id)"
+              <a class="btn btn-outline-danger btn-sm" style="margin: 5px" (click)="mostrarEliminarConfirmacion(proyecto.id)"
                 role="button">Eliminar</a>
               <button type="button" class="btn btn-outline-dark btn-sm" style="margin: 5px"
                 (click)="getProyectoId(proyecto.id)" data-toggle="modal" data-target="#exampleModal"
@@ -62,7 +62,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Agregue horas al proyecto</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cerrar()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -100,18 +100,18 @@
 
 
 <ng-template id= "ng-template"#modal let-modal>
-  <!-- Modal Proyecto creado con exito -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <!-- Modal horas cargadas con exito -->
+  <div class="modal fade modalconfirm" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog " role="document">
-      <div class="modal-content">
+      <div class="modal-content" id="modalid">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Proyecto creado con exito!</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <h5 class="modal-title" id="exampleModalLongTitle">Horas agregadas con exito!</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cerrar()">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          Su proyecto ha sido creado con exito
+          Las horas han sido agregadas a su proyecto con exito
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal"(click)="cerrar()">Cerrar</button>
@@ -120,3 +120,55 @@
     </div>
   </div>
   </ng-template>
+
+
+  <ng-template id= "ng-template"#modalEliminar let-modal>
+    <!-- Modal Proyecto eliminado con exito -->
+    <div class="modal fade modalconfirm" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog " role="document">
+        <div class="modal-content" id="modalid">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Proyecto eliminado con exito!</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cerrar()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Su proyecto ha sido eliminado con exito
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal"(click)="cerrar()">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </ng-template>
+
+  
+    <ng-template id= "ng-template"#modalEliminarConfirmacion let-modal>
+      <!-- Modal confirmacion antes de eliminar -->
+      <div class="modal hide fade in  modalconfirm" data-keyboard="false" data-backdrop="static" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" id="modalid">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Confirmacion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cerrar()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Esta seguro que desea eliminar el proyecto         
+      </div>
+      <div class="modal-footer">
+        <div class="form-group">
+        <button type="button" class="btn btn-primary" (click)="deleteProyecto()"  
+         data-dismiss="modal">Eliminar</button>
+          </div>
+        <button type="button" class="btn btn-secondary" style="margin: 10px" (click)="cerrar()"
+          data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+</ng-template>
