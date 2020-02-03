@@ -36,7 +36,6 @@ export class ProyectoCreateComponent implements OnInit {
 
     this.restApi.saveProyecto(this.objtempemp).subscribe(
         () => {
-
           this.mostrar();
           this.isDateFailed = false;
           this.router.navigate(['/proyecto-list']);

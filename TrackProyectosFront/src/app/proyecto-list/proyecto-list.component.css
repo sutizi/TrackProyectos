@@ -1,3 +1,17 @@
 .container {
     padding-bottom : 16%;
 }
+
+
+/*Modal de confirmacion horas*/
+.modalconfirm {
+    width: 400px;
+    height: 200px;
+    display: contents;
+}
+
+#modalid {
+    width: 400px !important;
+    height: 200px !important;
+    display: contents !important;
+}

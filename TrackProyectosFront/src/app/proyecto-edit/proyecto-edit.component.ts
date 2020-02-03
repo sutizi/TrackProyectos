@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProyectoService } from '../_services/proyecto.service';
+import { NgForm } from '@angular/forms';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-proyecto-edit',
@@ -12,7 +14,9 @@ export class ProyectoEditComponent implements OnInit {
   id = this.actRoute.snapshot.params['id'];
   proyectoData: any = {};
 
-  constructor( public restApi: ProyectoService, public actRoute: ActivatedRoute, public router: Router) { }
+  constructor( public restApi: ProyectoService, public actRoute: ActivatedRoute, public router: Router, private modalService: NgbModal) { }
+
+  @ViewChild('modal', {read: false, static: true} ) modal: TemplateRef<any>;
 
   ngOnInit() { 
     this.restApi.getProyecto(this.id).subscribe((data: {}) => {
@@ -21,13 +25,21 @@ export class ProyectoEditComponent implements OnInit {
   }
 
   updateProyecto() {
-    if(window.confirm('¿Seguro que desea editarlo?')){
       this.restApi.updateProyecto(this.id, this.proyectoData).subscribe((data: {}) => {
+        this.mostrar();
         this.router.navigate(['/proyecto-list'])
       })
-  }
   }
   cancel() {
     this.router.navigate(['/proyecto-list'])
   }
+
+  mostrar() {
+    this.modalService.open(this.modal);
+  }
+
+  cerrar() {
+    this.modalService.dismissAll();
+  }
+
 }
