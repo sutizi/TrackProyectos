@@ -1,35 +1,47 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpEvent } from '@angular/common/http';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { Usuario } from '../_models/usuario';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 
 const API_URL = 'http://localhost:4000/Users/';
-
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
   httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json; charset=utf-8'
-      })
-  };
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 
-  constructor(private http: HttpClient) { }
 
 
-actualizarUsuario(usuario): Observable<Usuario> {
-  var item = JSON.parse(localStorage.getItem('currentUser'));
-  var userId = item.id;
-  return this.http.put<Usuario>(API_URL + userId, JSON.stringify(usuario), this.httpOptions)
-    .pipe(
-      catchError(this.errorHandler)
-    );
+
+  private currentUserSubject: BehaviorSubject<Usuario>;
+  public currentUser: Observable<Usuario>;
+
+  constructor(private http: HttpClient) { 
+    this.currentUserSubject = new BehaviorSubject<Usuario>(JSON.parse(localStorage.getItem('currentUser')));
+    this.currentUser = this.currentUserSubject.asObservable();
   }
 
+  public get currentUserValue(): Usuario {
+    return this.currentUserSubject.value;
+  }
+
+  actualizarUsuario(usuario):Observable<Usuario> {
+    var item = JSON.parse(localStorage.getItem('currentUser'));
+    var userId = item.id;
+    return this.http.put<Usuario>(API_URL + userId, JSON.stringify(usuario), this.httpOptions).
+    pipe(map(user => {
+    // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    return user;
+   }));
+    }
+  
   getUsuario(): Observable<Usuario> {
     var item = JSON.parse(localStorage.getItem('currentUser'));
     var userId = item.id;

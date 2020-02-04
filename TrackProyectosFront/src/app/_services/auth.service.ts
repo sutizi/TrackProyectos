@@ -18,7 +18,7 @@ const httpOptions = {
 export class AuthService {
 
   private currentUserSubject: BehaviorSubject<Usuario>;
-    public currentUser: Observable<Usuario>;
+  public currentUser: Observable<Usuario>;
 
   constructor(private http: HttpClient) { 
     this.currentUserSubject = new BehaviorSubject<Usuario>(JSON.parse(localStorage.getItem('currentUser')));
@@ -30,6 +30,7 @@ export class AuthService {
   }
 
   login(credentials): Observable<any> {
+    console.log("11");
     return this.http.post(AUTH_API + 'Users/authenticate', {
       username: credentials.username,
       password: credentials.password
@@ -41,10 +42,16 @@ export class AuthService {
   }
 
   register(user): Observable<any> {
+    console.log("99");
     return this.http.post(AUTH_API + 'Users/register', {
       email: user.email,
       password: user.password,
       username: user.username
-    }, httpOptions)
+    }, httpOptions).pipe(map(user => {
+      // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      console.log("77");
+      return user;
+     }));
   }
 }

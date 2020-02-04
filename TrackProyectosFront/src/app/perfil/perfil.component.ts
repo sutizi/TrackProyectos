@@ -57,7 +57,18 @@ export class PerfilComponent implements OnInit {
   actualizarUsuario(){
     this.restApi.actualizarUsuario(this.form).subscribe((data: {}) => {
       this.mostrar();
-      this.router.navigate(['/proyecto-list'])
+      this.authService.login(this.form).subscribe(
+        data => {
+          this.tokenStorage.saveToken(data.accessToken);
+          this.tokenStorage.saveUser(data);
+          this.isLoginFailed = false;
+          this.isLoggedIn = true;
+        },
+        err => {
+          this.errorMessage = err;
+          this.isLoginFailed = true;
+        }
+      );
     })
   }
 
@@ -71,5 +82,6 @@ export class PerfilComponent implements OnInit {
 
   cerrar() {
     this.modalService.dismissAll();
+    
   }
 }
