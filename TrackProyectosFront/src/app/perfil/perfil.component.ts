@@ -4,7 +4,6 @@ import { TokenStorageService } from '../_services/token-storage.service';
 import { Usuario } from '../_models/usuario';
 import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
-import { NgForm } from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 

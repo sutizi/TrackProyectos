@@ -15,10 +15,6 @@ export class UserService {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-
-
-
-
   private currentUserSubject: BehaviorSubject<Usuario>;
   public currentUser: Observable<Usuario>;
 
@@ -36,7 +32,7 @@ export class UserService {
     var userId = item.id;
     return this.http.put<Usuario>(API_URL + userId, JSON.stringify(usuario), this.httpOptions).
     pipe(map(user => {
-    // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
+    //Se guardan las credenciales auth en local storage
     localStorage.setItem('currentUser', JSON.stringify(user));
     return user;
    }));

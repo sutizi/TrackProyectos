@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { retry, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { ProyectoDTO } from '../_models/ProyectoDTO';
 import { HoraDTO } from '../_models/HoraDTO';
 
 const API_URL = 'http://localhost:4000/Proyecto/';
+const API_Horas_URL = 'http://localhost:4000/Hora/';
 
 @Injectable({
   providedIn: 'root'
@@ -60,7 +61,7 @@ export class ProyectoService {
   }
 
   saveHoras(hora): Observable<HoraDTO> {
-    return this.http.post<HoraDTO>('http://localhost:4000/Hora/', JSON.stringify(hora), this.httpOptions)
+    return this.http.post<HoraDTO>(API_Horas_URL, JSON.stringify(hora), this.httpOptions)
       .pipe(
         catchError(this.errorHandler)
       );

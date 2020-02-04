@@ -1,7 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProyectoService } from '../_services/proyecto.service';
-import { NgForm } from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { Usuario } from '../_models/usuario';
 
-const AUTH_API = 'http://localhost:4000/';
+const API_URL = 'http://localhost:4000/Users/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,7 +29,7 @@ export class AuthService {
   }
 
   login(credentials): Observable<any> {
-    return this.http.post(AUTH_API + 'Users/authenticate', {
+    return this.http.post(API_URL + 'authenticate', {
       username: credentials.username,
       password: credentials.password
     }, httpOptions).pipe(map(user => {
@@ -41,12 +40,12 @@ export class AuthService {
   }
 
   register(user): Observable<any> {
-    return this.http.post(AUTH_API + 'Users/register', {
+    return this.http.post(API_URL + 'register', {
       email: user.email,
       password: user.password,
       username: user.username
     }, httpOptions).pipe(map(user => {
-      //Se guardan las credencialesauth credentials en local storage
+      //Se guardan las credenciales auth en local storage
       localStorage.setItem('currentUser', JSON.stringify(user));
       return user;
      }));

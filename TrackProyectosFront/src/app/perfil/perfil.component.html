@@ -1,68 +1,31 @@
 <div class="col-md-12">
   <div class="container-fluid" align= "center" >
-    <form
-      *ngIf="!isSuccessful"
-      name="form"
-      (ngSubmit)="f.form.valid && actualizarUsuario(f)"
-      #f="ngForm"
-      novalidate
-    >
+   
+    <form name="form" #f="ngForm" *ngIf="!isSuccessful" (ngSubmit)="f.form.valid && actualizarUsuario(f)" novalidate>
+
       <div class="form-group">
         <label for="username" >Username</label>
-        <input
-          type="text"
-          class="form-control"
-          name="username"
-          [(ngModel)]="form.username"
-          required
-          minlength="3"
-          maxlength="20"
-          #username="ngModel"
-        />
+        <input type="text" class="form-control" name="username" [(ngModel)]="form.username"  #username="ngModel" required  minlength="3" maxlength="20"/>
         <div class="alert-danger" *ngIf="f.submitted && username.invalid">
           <div *ngIf="username.errors.required">El username es requerido</div>
-          <div *ngIf="username.errors.minlength">
-            El username debe ser de al menos 3 caracteres
-          </div>
-          <div *ngIf="username.errors.maxlength">
-            El username no pude tener mas de 20 caracteres
-          </div>
+          <div *ngIf="username.errors.minlength">El username debe ser de al menos 3 caracteres</div>
+          <div *ngIf="username.errors.maxlength">El username no pude tener mas de 20 caractere</div>
         </div>
       </div>
       <div class="form-group">
         <label for="email">Email</label>
-        <input
-          type="email"
-          class="form-control"
-          name="email"
-          [(ngModel)]="form.email"
-          required
-          email
-          #email="ngModel"
-        />
+        <input type="email" class="form-control" name="email" [(ngModel)]="form.email" #email="ngModel" required email/>
         <div class="alert-danger" *ngIf="f.submitted && email.invalid">
           <div *ngIf="email.errors.required">El email es requerido</div>
-          <div *ngIf="email.errors.email">
-            La direccion de email ingresada no es valida
-          </div>
+          <div *ngIf="email.errors.email">La direccion de email ingresada no es valida</div>
         </div>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          [(ngModel)]="form.password"
-          required
-          minlength="6"
-          #password="ngModel"
-        />
+        <input type="password" class="form-control"  name="password" [(ngModel)]="form.password" #password="ngModel" required minlength="6"/>
         <div class="alert-danger" *ngIf="f.submitted && password.invalid">
           <div *ngIf="password.errors.required">El password es requerido</div>
-          <div *ngIf="password.errors.minlength">
-            El password debe ser de al menos 6 caracteres
-          </div>
+          <div *ngIf="password.errors.minlength">El password debe ser de al menos 6 caracteres</div>
         </div>
       </div>
       <div class="form-group">
@@ -87,12 +50,12 @@
 
 
 <ng-template id= "ng-template"#modal let-modal>
-  <!-- Modal Proyecto creado con exito -->
+  <!-- Modal Usuario actualizado con exito -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog " role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Usuario actualizado!</h5>
+          <h5 class="modal-title" id="exampleModalLongTitle">Usuario actualizado con exito!</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cerrar()">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -101,7 +64,7 @@
           Su usuario ha sido actualizado con exito
         </div>
         <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal"(click)="cerrar()"><a href="/proyecto-list" class="btn btn-secondary">Cerar</a></button>
+        <button type="button" class="btn btn-primary" [routerLink]="['/proyecto-list']" data-dismiss="modal"(click)="cerrar()">Aceptar</button>
         </div>
       </div>
     </div>
