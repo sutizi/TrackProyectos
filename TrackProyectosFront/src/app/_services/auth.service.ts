@@ -30,27 +30,24 @@ export class AuthService {
   }
 
   login(credentials): Observable<any> {
-    console.log("11");
     return this.http.post(AUTH_API + 'Users/authenticate', {
       username: credentials.username,
       password: credentials.password
     }, httpOptions).pipe(map(user => {
-           // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
+           //Se guardan las credenciales auth en local storage
            localStorage.setItem('currentUser', JSON.stringify(user));
            return user;
           }));
   }
 
   register(user): Observable<any> {
-    console.log("99");
     return this.http.post(AUTH_API + 'Users/register', {
       email: user.email,
       password: user.password,
       username: user.username
     }, httpOptions).pipe(map(user => {
-      // store user details and basic auth credentials in local storage to keep user logged in between page refreshes
+      //Se guardan las credencialesauth credentials en local storage
       localStorage.setItem('currentUser', JSON.stringify(user));
-      console.log("77");
       return user;
      }));
   }
