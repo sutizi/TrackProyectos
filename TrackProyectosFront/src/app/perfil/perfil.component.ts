@@ -24,7 +24,7 @@ export class PerfilComponent implements OnInit {
 
   nuevo: Usuario = new Usuario();
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, public restApi: UserService, public router: Router,private modalService: NgbModal) { }
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private restApi: UserService, private router: Router,private modalService: NgbModal) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {

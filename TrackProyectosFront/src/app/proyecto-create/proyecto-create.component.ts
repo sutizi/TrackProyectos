@@ -16,7 +16,7 @@ export class ProyectoCreateComponent implements OnInit {
   isDateFailed = false;
   errorMessage= "Error";
   
-  constructor( public restApi: ProyectoService, public router: Router,  private modalService: NgbModal) {}
+  constructor( private restApi: ProyectoService, private router: Router,  private modalService: NgbModal) {}
 
    @Input() objemp: ProyectoDTO = new ProyectoDTO();
    @ViewChild('modal', {read: false, static: true} ) modal: TemplateRef<any>;

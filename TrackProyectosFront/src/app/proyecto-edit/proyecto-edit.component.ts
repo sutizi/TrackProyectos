@@ -14,7 +14,7 @@ export class ProyectoEditComponent implements OnInit {
   id = this.actRoute.snapshot.params['id'];
   proyectoData: any = {};
 
-  constructor( public restApi: ProyectoService, public actRoute: ActivatedRoute, public router: Router, private modalService: NgbModal) { }
+  constructor( private restApi: ProyectoService, private actRoute: ActivatedRoute, private router: Router, private modalService: NgbModal) { }
 
   @ViewChild('modal', {read: false, static: true} ) modal: TemplateRef<any>;
 

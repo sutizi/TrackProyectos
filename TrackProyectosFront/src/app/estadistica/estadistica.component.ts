@@ -13,7 +13,7 @@ export class EstadisticaComponent implements OnInit {
 
   horas: any = [];
 
-  constructor(public restApi: EstadisticaService) { }
+  constructor(private restApi: EstadisticaService) { }
 
   ngOnInit() {
     //Cargo las estadisticas del backend e inicializo el grafico
