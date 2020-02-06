@@ -44,13 +44,13 @@ export class EstadisticaComponent implements OnInit {
 		data: [{
 			type: "column",
 			dataPoints: [
-				{ y: this.horas[0], label: fechas[5].getDate() +"/"+ (fechas[5].getMonth()+1) +"/"+ fechas[5].getFullYear()},//hace 6 dias
-				{ y: this.horas[1], label: fechas[4].getDate() +"/"+ (fechas[4].getMonth()+1) +"/"+ fechas[4].getFullYear()},//hace 5 dias
-				{ y: this.horas[2], label: fechas[3].getDate() +"/"+ (fechas[3].getMonth()+1) +"/"+ fechas[3].getFullYear() },//hace 4 dias
+				{ y: this.horas[6], label: fechas[5].getDate() +"/"+ (fechas[5].getMonth()+1) +"/"+ fechas[5].getFullYear()},//hace 6 dias
+				{ y: this.horas[5], label: fechas[4].getDate() +"/"+ (fechas[4].getMonth()+1) +"/"+ fechas[4].getFullYear()},//hace 5 dias
+				{ y: this.horas[4], label: fechas[3].getDate() +"/"+ (fechas[3].getMonth()+1) +"/"+ fechas[3].getFullYear() },//hace 4 dias
 				{ y: this.horas[3], label: fechas[2].getDate() +"/"+ (fechas[2].getMonth()+1) +"/"+ fechas[2].getFullYear()},//hace 3 dias
-				{ y: this.horas[4], label: fechas[1].getDate() +"/"+ (fechas[1].getMonth()+1) +"/"+ fechas[1].getFullYear()}, //hace 2 dias
-				{ y: this.horas[5], label: fechas[0].getDate() +"/"+ (fechas[0].getMonth()+1) +"/"+ fechas[0].getFullYear()},//hace 1 dia
-				{ y: this.horas[6], label: new Date().getDate()+ "/"+(new Date().getMonth()+1) +"/"+new Date().getUTCFullYear()},//hoy
+				{ y: this.horas[2], label: fechas[1].getDate() +"/"+ (fechas[1].getMonth()+1) +"/"+ fechas[1].getFullYear()}, //hace 2 dias
+				{ y: this.horas[1], label: fechas[0].getDate() +"/"+ (fechas[0].getMonth()+1) +"/"+ fechas[0].getFullYear()},//hace 1 dia
+				{ y: this.horas[0], label: new Date().getDate()+ "/"+ (new Date().getMonth()+1) +"/"+new Date().getUTCFullYear()},//hoy
 			]
 		}]
 	});
