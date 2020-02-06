@@ -90,7 +90,7 @@ namespace TrackProyectos.Controllers
             //Control: email unico
             if(_context.Users.Any(x => x.Email == nuevoDTO.Email))
             {
-                return BadRequest(new {message = "El email especificado ya se encuentra regisrado"});
+                return BadRequest(new {message = "El email especificado ya se encuentra registrado"});
             }
 
              // crear usuario	
@@ -121,7 +121,7 @@ namespace TrackProyectos.Controllers
             //Control: email unico
             if(_context.Users.Any(x => x.Email == nuevoDTO.Email && x.Id!= usuario.Id))
             {
-                return BadRequest(new {message = "El email especificado ya se encuentra regisrado"});
+                return BadRequest(new {message = "El email especificado ya se encuentra registrado"});
             }
 
             _userService.Update(usuario, nuevoDTO.Password);
