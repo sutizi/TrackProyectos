@@ -11,10 +11,19 @@ import { ProyectoCreateComponent } from './proyecto-create/proyecto-create.compo
 import { ProyectoEditComponent } from './proyecto-edit/proyecto-edit.component';
 import { ProyectoListComponent } from './proyecto-list/proyecto-list.component';
 import { AuthGuard } from './_helpers/auth.guard';
+import { LoginComponentDesktop } from './login/login.component.desktop';
+import { LoginComponentMobile } from './login/login.component.mobile';
+
+const desktop_routes: Routes = [
+  {path: 'login', component: LoginComponentDesktop }
+];
+
+const mobile_routes: Routes = [
+  {path: 'login', component: LoginComponentMobile }
+];
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'perfil', component: PerfilComponent },
   { path: 'estadistica', component: EstadisticaComponent, canActivate:[AuthGuard]},
@@ -25,7 +34,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), RouterModule.forRoot(mobile_routes), RouterModule.forRoot(desktop_routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
