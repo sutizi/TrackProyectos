@@ -6,7 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
-import { LoginComponent } from './login/login.component';
+import { LoginComponentDesktop } from './login/login.component.desktop';
+import { LoginComponentMobile } from './login/login.component.mobile';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { PerfilComponent } from './perfil/perfil.component';
@@ -21,7 +22,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    LoginComponentDesktop,
+    LoginComponentMobile,
     RegisterComponent,
     HomeComponent,
     PerfilComponent,
@@ -35,7 +37,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [authInterceptorProviders, ProyectoService],
   bootstrap: [AppComponent]
