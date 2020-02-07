@@ -49,11 +49,11 @@ export abstract class LoginComponent implements OnInit {
     this.myViewModel = this.model.clone();
     if (this.applicationStateService.getIsMobileResolution())
     {
-        console.log("mobile")
+        console.log("mobile"+"....is mobile resolution:"+this.isMobileResolution)
     }
     else
     {
-      console.log("desktop");
+      console.log("desktop"+"....is mobile resolution:"+this.isMobileResolution);
     }
     }
 
