@@ -58,7 +58,8 @@ export class ProyectoListComponent implements OnInit {
    AgregarHoras(regForm:NgForm){
     this.nuevo =new HoraDTO();
     this.nuevo.cantidad=parseInt(regForm.value.cantidad);
-    this.nuevo.dia=regForm.value.dia;
+    //this.nuevo.dia=regForm.value.dia;
+    this.nuevo.dia=new Date(this.hoy());
     this.nuevo.descripcion=regForm.value.descripcion;
     this.nuevo.proyectoID=this.IdProyectoHoras;
     this.restApi.saveHoras(this.nuevo).subscribe(()=>{
@@ -93,4 +94,21 @@ export class ProyectoListComponent implements OnInit {
   cerrar() {
     this.modalService.dismissAll();
   }
+
+  hoy(){ 
+    var date = new Date();
+
+    var day = (date.getDate())+"";
+    var month = (date.getMonth()+1)+"";
+    var year = date.getFullYear();
+
+    if (parseInt(month) < 10) month = "0"+month; 
+    if (parseInt(day) < 10) day = "0"+day;
+
+    var today = year + "-" + month + "-" + day;
+    (<HTMLInputElement>document.getElementById("theDate")).value = today;
+    return today;
+    
+  }
+
 }
