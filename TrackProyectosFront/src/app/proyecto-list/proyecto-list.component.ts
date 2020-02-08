@@ -4,13 +4,15 @@ import { HoraDTO } from '../_models/HoraDTO';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ApplicationStateService } from '../_services/aplication-state.service';
+import { ProyectoDTO } from '../_models/ProyectoDTO';
 
 @Component({
   selector: 'app-proyecto-list',
   templateUrl: './proyecto-list.component.html',
   styleUrls: ['./proyecto-list.component.css']
 })
-export class ProyectoListComponent implements OnInit {
+export abstract class ProyectoListComponent implements OnInit {
   [x: string]: any;
 
   IdProyectoHoras: any;
@@ -25,6 +27,10 @@ export class ProyectoListComponent implements OnInit {
 
   idEliminar = 0;
 
+  public myViewModel: ProyectoDTO;
+  private model: ProyectoDTO;
+  isMobileResolution: boolean;
+
   @Input() hora: HoraDTO = new HoraDTO();
   @ViewChild('modal', {read: false, static: true} ) modal: TemplateRef<any>;
   @ViewChild('modalEliminar', {read: false, static: true} ) modalEliminar: TemplateRef<any>;
@@ -32,7 +38,12 @@ export class ProyectoListComponent implements OnInit {
 
   nuevo: HoraDTO = new HoraDTO();
 
-  constructor( private restApi: ProyectoService, private actRoute: ActivatedRoute, private router: Router,  private modalService: NgbModal) { }
+  constructor( private restApi: ProyectoService, private actRoute: ActivatedRoute, private router: Router,  private modalService: NgbModal, private applicationStateService: ApplicationStateService) {
+    this.applicationStateService = applicationStateService;
+    this.model = new ProyectoDTO();
+    this.myViewModel = new ProyectoDTO();
+    this.actualizarVista();
+   }
 
   ngOnInit() {
     this.loadProyectos();
@@ -110,5 +121,18 @@ export class ProyectoListComponent implements OnInit {
     return today;
     
   }
+
+  private actualizarVista(): void {
+    this.myViewModel = this.model.clone();
+    if (this.applicationStateService.getIsMobileResolution())
+    {
+        console.log("mobile"+"....is mobile resolution:"+this.isMobileResolution)
+    }
+    else
+    {
+      console.log("desktop"+"....is mobile resolution:"+this.isMobileResolution);
+    }
+    }
+
 
 }
