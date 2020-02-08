@@ -57,7 +57,7 @@ export class ProyectoListComponent implements OnInit {
 
    AgregarHoras(regForm:NgForm){
     this.nuevo =new HoraDTO();
-    this.nuevo.cantidad=parseInt(regForm.value.cantidad);
+    this.nuevo.cantidad=parseInt((<HTMLInputElement>document.getElementById("cantHoras")).value);
     //this.nuevo.dia=regForm.value.dia;
     this.nuevo.dia=new Date(this.hoy());
     this.nuevo.descripcion=regForm.value.descripcion;
@@ -109,6 +109,20 @@ export class ProyectoListComponent implements OnInit {
     (<HTMLInputElement>document.getElementById("theDate")).value = today;
     return today;
     
+  }
+
+
+  sumarHora(){ 
+    var hora= parseInt((<HTMLInputElement>document.getElementById("cantHoras")).value) ;
+    var suma= hora+1;
+    (<HTMLInputElement>document.getElementById("cantHoras")).value = ""+suma;
+  }
+
+  
+  restarHora(){ 
+    var hora= parseInt((<HTMLInputElement>document.getElementById("cantHoras")).value) ;
+    var suma= hora-1;
+    (<HTMLInputElement>document.getElementById("cantHoras")).value = ""+suma;
   }
 
 }

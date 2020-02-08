@@ -49,7 +49,7 @@
           <form #hora='ngForm' (ngSubmit)="AgregarHoras(hora)" class="form-horizontal" style="width:50%">
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Cantidad de horas:</label>
-              <input type="number" class="form-control" min="0" max="24" value="1" [(ngModel)]='hora.cantidad' name="cantidad" #cantidad="ngModel" required>
+              <input type="number" value="1" class="form-control" min="0" max="24" [(ngModel)]='hora.cantidad' name="cantidad" #cantidad="ngModel" required>
             </div>
             <div class="alert-danger">
               <div *ngIf="hora.cantidad < 0 || hora.cantidad >24">La cantidad de horas debe ser mayor a cero y menor a 24</div>
