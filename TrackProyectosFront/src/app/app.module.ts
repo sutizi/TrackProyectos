@@ -16,8 +16,9 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { EstadisticaComponent } from './estadistica/estadistica.component';
 import { ProyectoCreateComponent } from './proyecto-create/proyecto-create.component';
 import { ProyectoEditComponent } from './proyecto-edit/proyecto-edit.component';
-import { ProyectoListComponent } from './proyecto-list/proyecto-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProyectoListComponentDesktop } from './proyecto-list/proyecto-list.component.desktop';
+import { ProyectoListComponentMobile } from './proyecto-list/proyecto-list.component.mobile';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     EstadisticaComponent,
     ProyectoCreateComponent,
     ProyectoEditComponent,
-    ProyectoListComponent
+    ProyectoListComponentMobile,
+    ProyectoListComponentDesktop
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
   ],
   providers: [authInterceptorProviders, ProyectoService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ProyectoListComponentMobile, LoginComponentMobile]
 })
 export class AppModule { }
