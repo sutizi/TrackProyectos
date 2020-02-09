@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EstadisticaService } from '../_services/estadistica.service';
 import * as CanvasJS from './canvasjs.min';
+import { ProyectoService } from '../_services/proyecto.service';
 
 @Component({
   selector: 'app-estadistica',
@@ -13,15 +14,21 @@ export class EstadisticaComponent implements OnInit {
 
   horas: any = [];
 
-  constructor(private restApi: EstadisticaService) { }
+  todasLasEstadisticas = false;
+
+  Proyecto : any = [];
+
+  constructor(private restApi: EstadisticaService, private restApiProyectos: ProyectoService) { }
 
   ngOnInit() {
-    //Cargo las estadisticas del backend e inicializo el grafico
-	this.loadEstadistica();
+	//Cargo la lista de proyectos
+	this.loadProyectos();
+	
 }
 
-  loadEstadistica() {
-    return this.restApi.GetEstadistica().subscribe((data: {}) => {
+  loadEstadisticaTodos() {
+	this.todasLasEstadisticas = true;
+    return this.restApi.GetEstadisticaTodos().subscribe((data: {}) => {
 	  this.Estadistica = data;
 	  //Inicializo el arreglo de horas para el grafico
 	  //El grafico se inicializa solo si hay horas en esta semana
@@ -30,6 +37,27 @@ export class EstadisticaComponent implements OnInit {
 		//Inicializo el grafico
 		this.inicializarGrafico();
 	  }
+    })
+  }
+
+  loadEstadisticaProyecto(idProyecto : number) {
+	this.todasLasEstadisticas = false;
+    return this.restApi.GetEstadisticaProyecto(idProyecto).subscribe((data: {}) => {
+	  this.Estadistica = data;
+	  //Inicializo el arreglo de horas para el grafico
+	  //El grafico se inicializa solo si hay horas en esta semana
+		//Inicializo el grafico
+		this.inicializarGrafico();
+
+    })
+  }
+
+  /**
+   * Obtiene la lista de todos los proyectos del usuario
+   */
+  loadProyectos() {
+    return this.restApiProyectos.getProyectos().subscribe((data: {}) => {
+      this.Proyecto = data;
     })
   }
 

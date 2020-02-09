@@ -21,7 +21,7 @@ export class EstadisticaService {
   constructor(private http: HttpClient) {  }
 
   
-  GetEstadistica(): Observable<EstadisticaDTO> {
+  GetEstadisticaTodos(): Observable<EstadisticaDTO> {
     var item = JSON.parse(localStorage.getItem('currentUser'));
     var userId = item.id;
     return this.http.get<EstadisticaDTO>(API_URL + userId + "/proyecto/0" )
@@ -33,5 +33,14 @@ export class EstadisticaService {
   errorHandler(error) {
     let errorMessage = error.error.message;
     return throwError(errorMessage);
+  }
+
+  GetEstadisticaProyecto(idProyecto : number): Observable<EstadisticaDTO> {
+    var item = JSON.parse(localStorage.getItem('currentUser'));
+    var userId = item.id;
+    return this.http.get<EstadisticaDTO>(API_URL + userId + "/proyecto/" + idProyecto )
+      .pipe(
+        catchError(this.errorHandler)
+      );
   }
 }

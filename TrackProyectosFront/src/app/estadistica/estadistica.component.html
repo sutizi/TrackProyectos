@@ -23,12 +23,12 @@
         <td>Horas trabajadas totales: </td>
         <td>{{Estadistica.horasTotales}}</td>
       </tr>
-      <tr>
+      <tr *ngIf="todasLasEstadisticas">
         <th scope="row"></th>
         <td>Proyectos totales: </td>
         <td>{{Estadistica.cantidadProyectos}}</td>
       </tr>
-      <tr>
+      <tr *ngIf="todasLasEstadisticas">
         <th scope="row"></th>
         <td>Proyectos completados: </td>
         <td>{{Estadistica.cantidadProyectosTermiandos}}</td>
@@ -42,6 +42,22 @@
   </table>
 
   <br><br>
+  <div class="col-md-6" >
+    <table class="table">
+      <tr *ngFor="let proyecto of Proyecto">
+        <td>{{proyecto.nombre}}</td>
+        <td> <button type="button" class="btn btn-outline-dark btn-sm" 
+                    style="margin: 5px" (click)="loadEstadisticaProyecto(proyecto.id)"> Ver Estadisticas</button>
+        </td>
+     </tr>
+     <tr>
+       <td>TODOS</td>
+        <td> <button type="button" class="btn btn-outline-dark btn-sm" 
+        style="margin: 5px" (click)="loadEstadisticaTodos()"> Ver Estadisticas</button>
+        </td>
+      </tr>
+    </table>
+  </div>
 
   <h2> Resumen de esta semana</h2>
 
@@ -69,6 +85,8 @@
     <br><br><br><br><br>
   </div>
 
-  <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+  <div *ngIf="Estadistica.horasDTOSemana !== undefined">
+     <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+    </div>
 
 </div>

@@ -47,7 +47,8 @@ namespace TrackProyectos.Controllers
             var proyectos = programador.Proyectos.Where(x => !x.IsDeleted).ToList();
 
             //Unifico todas las horas en una sola lista
-            var horas = programador.GetHoras(proyectos);
+            var horas = programador.GetHoras(proyectos).ToList();
+            horas = idProyecto > 0 ? horas.Where(x => x.ProyectoID == idProyecto).ToList() : horas;
 
             var hoy = DateTime.Today;
             var primerDia = DateTime.Today.AddDays(-7);
@@ -55,13 +56,8 @@ namespace TrackProyectos.Controllers
             IList<HoraDTO> horasDTOSemana = new List<HoraDTO>();
             IList<int> horasPorDia = new List<int>();
 
-            if (idProyecto > 0)
-            {
-                var proyecto =  await _context.Proyectos.FirstOrDefaultAsync(x => x.Id==idProyecto);
-                horasDTOSemana = _mapper.Map<IEnumerable<Hora>, IList<HoraDTO>> (horas.Where(x => x.Dia >= primerDia && x.Dia <= hoy).OrderBy(x => x.Dia));
-                horasPorDia = calcularHorasPorDia(horasDTOSemana);
-
-            }
+            horasDTOSemana = _mapper.Map<IEnumerable<Hora>, IList<HoraDTO>> (horas.Where(x => x.Dia >= primerDia && x.Dia <= hoy).OrderBy(x => x.Dia));
+            horasPorDia = calcularHorasPorDia(horasDTOSemana);
 
             //Creo el dto de estadistica e inicializo todos sus atributos
             EstadisticaDTO estadisticaDTO = new EstadisticaDTO()
