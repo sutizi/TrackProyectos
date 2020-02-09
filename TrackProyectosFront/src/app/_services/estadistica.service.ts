@@ -24,7 +24,7 @@ export class EstadisticaService {
   GetEstadistica(): Observable<EstadisticaDTO> {
     var item = JSON.parse(localStorage.getItem('currentUser'));
     var userId = item.id;
-    return this.http.get<EstadisticaDTO>(API_URL + userId)
+    return this.http.get<EstadisticaDTO>(API_URL + userId + "/proyecto/0" )
       .pipe(
         catchError(this.errorHandler)
       );

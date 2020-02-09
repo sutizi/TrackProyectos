@@ -32,12 +32,12 @@ namespace TrackProyectos.Controllers
             Retorna el las estadisticas correspondientes al id recibido
             params: id: id del usuario que se quiere obtener las estadisticas
         */
-        [HttpGet("{id}")]
+        [HttpGet("{idProgramador}/proyecto/{idProyecto}")]
         [Authorize]
         //GET :/Estadistica/:id
-        public async Task<ActionResult<EstadisticaDTO>> GetEstadistica(int id)
+        public async Task<ActionResult<EstadisticaDTO>> GetEstadistica(int idProgramador, int idProyecto)
         {
-            var programador = await _context.Programadores.Include(t => t.Proyectos).ThenInclude(p => p.Horas).FirstOrDefaultAsync(x => x.Id==id);
+            var programador = await _context.Programadores.Include(t => t.Proyectos).ThenInclude(p => p.Horas).FirstOrDefaultAsync(x => x.Id==idProgramador);
 
             if (programador == null)
             {
@@ -52,6 +52,17 @@ namespace TrackProyectos.Controllers
             var hoy = DateTime.Today;
             var primerDia = DateTime.Today.AddDays(-7);
 
+            IList<HoraDTO> horasDTOSemana = new List<HoraDTO>();
+            IList<int> horasPorDia = new List<int>();
+
+            if (idProyecto > 0)
+            {
+                var proyecto =  await _context.Proyectos.FirstOrDefaultAsync(x => x.Id==idProyecto);
+                horasDTOSemana = _mapper.Map<IEnumerable<Hora>, IList<HoraDTO>> (horas.Where(x => x.Dia >= primerDia && x.Dia <= hoy).OrderBy(x => x.Dia));
+                horasPorDia = calcularHorasPorDia(horasDTOSemana);
+
+            }
+
             //Creo el dto de estadistica e inicializo todos sus atributos
             EstadisticaDTO estadisticaDTO = new EstadisticaDTO()
             {
@@ -60,9 +71,25 @@ namespace TrackProyectos.Controllers
                 HorasTotales = horas.Sum(x => x.Cantidad),
                 HorasMes = horas.Where(x => x.Dia.Month == DateTime.Today.Month).Sum(x => x.Cantidad),
                 HorasSemana = horas.Where(x => x.Dia >= primerDia && x.Dia <= hoy).Sum(x => x.Cantidad),
-                HorasDTOSemana = _mapper.Map<IEnumerable<Hora>, IList<HoraDTO>> (horas.Where(x => x.Dia >= primerDia && x.Dia <= hoy).OrderBy(x => x.Dia))
+                HorasDTOSemana = horasDTOSemana,
+                HorasDiarias = horasPorDia
             };
             return estadisticaDTO;
+        }
+
+        private IList<int> calcularHorasPorDia(IList<HoraDTO> horas)
+        {
+            var aRet = new List<int>();
+
+            var dia = DateTime.Today;
+
+            for(int i = 0; i <7; i++)
+            {
+                aRet.Add(horas.Where(x => x.Dia == dia).Sum(x => x.Cantidad));
+                dia = dia.AddDays(-1);
+            }
+
+            return aRet;
         }
     }
 }

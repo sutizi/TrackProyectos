@@ -8,5 +8,6 @@ export class EstadisticaDTO{
     horasTotales: number;
     horasSemana: number;
     horasDTOSemana: Array<HoraDTO>;
+    horasDiarias: Array<number>;
     
 }
