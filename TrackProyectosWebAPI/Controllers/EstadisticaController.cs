@@ -51,7 +51,7 @@ namespace TrackProyectos.Controllers
             horas = idProyecto > 0 ? horas.Where(x => x.ProyectoID == idProyecto).ToList() : horas;
 
             var hoy = DateTime.Today;
-            var primerDia = DateTime.Today.AddDays(-7);
+            var primerDia = DateTime.Today.AddDays(-6);
 
             IList<HoraDTO> horasDTOSemana = new List<HoraDTO>();
             IList<int> horasPorDia = new List<int>();

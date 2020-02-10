@@ -1,0 +1,8 @@
+input[type=checkbox]
+{
+        cursor: pointer;
+        padding-right: 18px;
+        line-height: 20px;
+        min-width: 18px;
+        min-height: 18px;
+}
