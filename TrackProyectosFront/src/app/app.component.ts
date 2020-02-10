@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { TokenStorageService } from './_services/token-storage.service';
 import { AuthService } from './_services/auth.service';
 import { Usuario } from './_models/usuario';
+import { ApplicationStateService } from './_services/aplication-state.service';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +15,12 @@ export class AppComponent implements OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   username: string;
+  isMobile : boolean;
 
-  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService) { }
+  constructor(private tokenStorageService: TokenStorageService, private authService : AuthService, private applicationStateService: ApplicationStateService) { }
 
   ngOnInit() {
+    this.isMobile = this.applicationStateService.getIsMobileResolution();
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
@@ -31,5 +34,10 @@ export class AppComponent implements OnInit {
     this.tokenStorageService.signOut();
      localStorage.removeItem('currentUser');
     window.location.reload();
+  }
+
+  @HostListener("window:onbeforeunload",["$event"])
+  clearLocalStorage(event){
+      localStorage.clear();
   }
 }

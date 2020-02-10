@@ -9,7 +9,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-proyecto-list',
-    templateUrl: './proyecto-list.component.html',
+    templateUrl: './proyecto-list.component.mobile.html',
     styleUrls: ['./proyecto-list.component.css']
   })
   export class ProyectoListComponentMobile extends ProyectoListComponent {

@@ -1,12 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 
 @Injectable({
     providedIn: 'root'
   })
-export class ApplicationStateService {
+export class ApplicationStateService implements OnInit{
 
-  private isMobileResolution: boolean;
+  isMobileResolution: boolean;
+
+  ngOnInit() {
+    this.isMobileResolution = true;
+  }
+  
 
   constructor() {
     if (window.innerWidth < 900) {

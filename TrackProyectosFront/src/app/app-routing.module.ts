@@ -32,16 +32,6 @@ const mobile_routes: Routes = [
   { path: 'proyecto-list', component: ProyectoListComponentMobile, canActivate:[AuthGuard] }
 ];
 
-const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'perfil', component: PerfilComponent },
-  { path: 'estadistica', component: EstadisticaComponent, canActivate:[AuthGuard]},
-  { path: 'proyecto-create', component: ProyectoCreateComponent, canActivate:[AuthGuard] },
-  { path: 'proyecto-edit/:id', component: ProyectoEditComponent, canActivate:[AuthGuard] },  
-  { path: '', redirectTo: '/home', pathMatch: 'full' }
-];
-
 @NgModule({
   // as default we set the desktop routing configuration. if mobile will be started it will be replaced below.
   // note that we must specify some routes here (not an empty array) otherwise the trick below doesn't work...
