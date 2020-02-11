@@ -63,7 +63,6 @@ export abstract class ProyectoListComponent implements OnInit {
       else //si mantener sesion es falso
       {
 
-      
         this.loadProyectos();
 
       }
@@ -89,11 +88,13 @@ export abstract class ProyectoListComponent implements OnInit {
 
    AgregarHoras(regForm:NgForm){
     this.nuevo =new HoraDTO();
-    this.nuevo.dia=new Date(this.hoy()); //setea la fecha de hoy 
+    this.nuevo.dia=regForm.value.dia; //recupera la fecha ingresada por el calendario
+    if (this.nuevo.dia == undefined)
+      this.nuevo.dia=new Date(this.hoy()); //setea la fecha de hoy
     this.nuevo.cantidad=this.cantidadHoras;
     this.nuevo.descripcion=regForm.value.descripcion;
     this.nuevo.proyectoID=this.IdProyectoHoras;
-    this.nuevo.dia=regForm.value.dia; //recupera la fecha ingresada por el calendario
+
     this.restApi.saveHoras(this.nuevo).subscribe(()=>{
     this.router.navigate(['/proyecto-list'])
     this.mostrarModal();
@@ -147,6 +148,12 @@ export abstract class ProyectoListComponent implements OnInit {
   }
   restarHora(){ 
     this.cantidadHoras--;
+  }
+
+  esFechaValida(dia){
+    //suscribe con idproyecto horas y obtenes el proyecto
+    //comparas las fechas del backend con dia
+
   }
 
 

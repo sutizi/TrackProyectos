@@ -41,6 +41,18 @@
     </tbody>
   </table>
 
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <button class="dropdown-item" type="button" (click)="loadEstadisticaTodos()" selected="selected"><option selected="selected">Todos</option></button>
+      <tr *ngFor="let proyecto of Proyecto">
+        <button class="dropdown-item" type="button" (click)="loadEstadisticaProyecto(proyecto.id)">{{proyecto.nombre}}</button>
+
+      </tr>
+    </div>
+  </div>
+
   <br><br>
   <div class="col-md-6" >
     <table class="table">
@@ -85,8 +97,7 @@
     <br><br><br><br><br>
   </div>
 
-  <div *ngIf="Estadistica.horasDTOSemana !== undefined">
      <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-    </div>
+
 
 </div>

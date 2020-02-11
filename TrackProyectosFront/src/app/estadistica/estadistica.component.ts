@@ -23,6 +23,7 @@ export class EstadisticaComponent implements OnInit {
   ngOnInit() {
 	//Cargo la lista de proyectos
 	this.loadProyectos();
+	this.loadEstadisticaTodos();
 	
 }
 
@@ -32,7 +33,7 @@ export class EstadisticaComponent implements OnInit {
 	  this.Estadistica = data;
 	  //Inicializo el arreglo de horas para el grafico
 	  //El grafico se inicializa solo si hay horas en esta semana
-	  if(this.Estadistica.horasDTOSemana !== undefined && this.Estadistica.horasSemana >0)
+	  if(this.Estadistica.horasDiarias != undefined)
 	  {
 		//Inicializo el grafico
 		this.inicializarGrafico();
@@ -47,7 +48,11 @@ export class EstadisticaComponent implements OnInit {
 	  //Inicializo el arreglo de horas para el grafico
 	  //El grafico se inicializa solo si hay horas en esta semana
 		//Inicializo el grafico
-		this.inicializarGrafico();
+		if(this.Estadistica.horasDiarias != undefined)
+		{
+		  //Inicializo el grafico
+		  this.inicializarGrafico();
+		}
 
     })
   }
