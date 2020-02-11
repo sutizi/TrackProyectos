@@ -31,6 +31,7 @@ export class EstadisticaComponent implements OnInit {
 	this.todasLasEstadisticas = true;
     return this.restApi.GetEstadisticaTodos().subscribe((data: {}) => {
 	  this.Estadistica = data;
+	  document.getElementById('dropdownMenu2').innerHTML = "Todos";
 	  //Inicializo el arreglo de horas para el grafico
 	  //El grafico se inicializa solo si hay horas en esta semana
 	  if(this.Estadistica.horasDiarias != undefined)
@@ -41,10 +42,11 @@ export class EstadisticaComponent implements OnInit {
     })
   }
 
-  loadEstadisticaProyecto(idProyecto : number) {
+  loadEstadisticaProyecto(idProyecto : number, nombre: string) {
 	this.todasLasEstadisticas = false;
     return this.restApi.GetEstadisticaProyecto(idProyecto).subscribe((data: {}) => {
 	  this.Estadistica = data;
+	  document.getElementById('dropdownMenu2').innerHTML = nombre;
 	  //Inicializo el arreglo de horas para el grafico
 	  //El grafico se inicializa solo si hay horas en esta semana
 		//Inicializo el grafico
