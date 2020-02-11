@@ -36,8 +36,4 @@ export class AppComponent implements OnInit {
     window.location.reload();
   }
 
-  @HostListener("window:onbeforeunload",["$event"])
-  clearLocalStorage(event){
-      localStorage.clear();
-  }
 }

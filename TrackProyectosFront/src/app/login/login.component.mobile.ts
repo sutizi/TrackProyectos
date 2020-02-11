@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { Router } from '@angular/router';
 import { ApplicationStateService } from '../_services/aplication-state.service';
 import { LoginComponent } from './login.component';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
     selector:    'app-login-mobile',

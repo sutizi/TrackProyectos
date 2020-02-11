@@ -21,11 +21,14 @@
             <div *ngIf="password.errors.minlength">El password debe ser de al menos 6 caracteres </div>
           </div>
         </div>
-
-        <div class="form-group form-check">
-          <input type="checkbox"  class="form-check-input" checked  ng-model="mantenerSesion">
-          <label class="form-check-label" >Recordarme</label>
+        <div class="form-group">
+        <div class="btn-group-toggle" data-toggle="buttons">
+          <label class="btn btn-secondary active">
+            <input type="checkbox" checked autocomplete="off" name="mantenerSesion" [(ngModel)]="form.mantenerSesion" #mantenerSesion="ngModel" (click) = 'updateMantenerSesion()'> Checked
+          </label>
         </div>
+        </div>
+
 
         <div class="form-group">
           <button class="btn btn-primary btn-block">Ingresar</button>

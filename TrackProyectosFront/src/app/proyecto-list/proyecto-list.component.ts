@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef, ViewChild, HostListener } from '@angular/core';
 import { ProyectoService } from '../_services/proyecto.service';
 import { HoraDTO } from '../_models/HoraDTO';
 import { NgForm } from '@angular/forms';
@@ -6,6 +6,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApplicationStateService } from '../_services/aplication-state.service';
 import { ProyectoDTO } from '../_models/ProyectoDTO';
+import { LoginComponent } from '../login/login.component';
+import { TokenStorageService } from '../_services/token-storage.service';
+import { StylesCompileDependency } from '@angular/compiler';
 
 @Component({
   selector: 'app-proyecto-list',
@@ -27,6 +30,8 @@ export abstract class ProyectoListComponent implements OnInit {
 
   idEliminar = 0;
 
+  loginComponent = null;
+
   public myViewModel: ProyectoDTO;
   private model: ProyectoDTO;
   isMobileResolution: boolean;
@@ -38,15 +43,30 @@ export abstract class ProyectoListComponent implements OnInit {
 
   nuevo: HoraDTO = new HoraDTO();
 
-  constructor( private restApi: ProyectoService, private actRoute: ActivatedRoute, private router: Router,  private modalService: NgbModal, private applicationStateService: ApplicationStateService) {
+  constructor( private restApi: ProyectoService, private actRoute: ActivatedRoute, private router: Router,  private modalService: NgbModal, private applicationStateService: ApplicationStateService, private lc: LoginComponent, private tokenStorage: TokenStorageService) {
     this.applicationStateService = applicationStateService;
     this.model = new ProyectoDTO();
     this.myViewModel = new ProyectoDTO();
+    this.loginComponent = lc;
     this.actualizarVista();
    }
 
   ngOnInit() {
-    this.loadProyectos();
+
+    console.log(JSON.parse(localStorage.getItem('mantenerSesion'))+'mantener');
+    if (this.tokenStorage.getToken()) {
+      if(JSON.parse(localStorage.getItem('mantenerSesion')) == true)
+      {
+        this.loadProyectos();
+      }
+      else //si mantener sesion es falso
+      {
+
+      
+        this.loadProyectos();
+
+      }
+    }
   }
 
   loadProyectos() {
@@ -146,6 +166,18 @@ export abstract class ProyectoListComponent implements OnInit {
       console.log("desktop"+"....is mobile resolution:"+this.isMobileResolution);
     }
     }
+
+    logout() {
+      this.tokenStorage.signOut();
+       localStorage.removeItem('currentUser');
+    }
+
+    @HostListener("window:beforeunload",["$event"])
+    cerrarSesion($event)
+    {
+      if (JSON.parse(localStorage.getItem('mantenerSesion')) == false)
+        this.logout();
+     }
 
 
 }

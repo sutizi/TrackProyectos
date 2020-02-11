@@ -39,7 +39,7 @@ import { ProyectoListComponentMobile } from './proyecto-list/proyecto-list.compo
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgbModule,
+    NgbModule
   ],
   providers: [authInterceptorProviders, ProyectoService],
   bootstrap: [AppComponent],

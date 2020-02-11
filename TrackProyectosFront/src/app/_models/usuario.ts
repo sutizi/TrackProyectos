@@ -23,6 +23,7 @@ export class Usuario {
         clonedModel.username = this.username;
         clonedModel.password = this.password;
         clonedModel.token = this.token;
+
         return clonedModel;
       }
 }
