@@ -9,7 +9,6 @@ export class ApplicationStateService implements OnInit{
   isMobileResolution: boolean;
 
   ngOnInit() {
-    this.isMobileResolution = true;
   }
   
 

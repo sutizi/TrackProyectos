@@ -68,11 +68,12 @@ export abstract class ProyectoListComponent implements OnInit {
 
    AgregarHoras(regForm:NgForm){
     this.nuevo =new HoraDTO();
-    this.nuevo.cantidad=parseInt((<HTMLInputElement>document.getElementById("cantHoras")).value);
-    //this.nuevo.dia=regForm.value.dia;
-    this.nuevo.dia=new Date(this.hoy());
+    
+    this.nuevo.dia=new Date(this.hoy()); //setea la fecha de hoy 
     this.nuevo.descripcion=regForm.value.descripcion;
     this.nuevo.proyectoID=this.IdProyectoHoras;
+    this.nuevo.dia=regForm.value.dia; //recupera la fecha ingresada por el calendario
+    this.nuevo.cantidad= parseInt((<HTMLInputElement>document.getElementById("cantHoras")).value);
     this.restApi.saveHoras(this.nuevo).subscribe(()=>{
     this.router.navigate(['/proyecto-list'])
     this.mostrarModal();
@@ -119,22 +120,20 @@ export abstract class ProyectoListComponent implements OnInit {
     var today = year + "-" + month + "-" + day;
     (<HTMLInputElement>document.getElementById("theDate")).value = today;
     return today;
-    
   }
-
-
+  
   sumarHora(){ 
     var hora= parseInt((<HTMLInputElement>document.getElementById("cantHoras")).value) ;
     var suma= hora+1;
     (<HTMLInputElement>document.getElementById("cantHoras")).value = ""+suma;
   }
-
-  
   restarHora(){ 
     var hora= parseInt((<HTMLInputElement>document.getElementById("cantHoras")).value) ;
     var suma= hora-1;
     (<HTMLInputElement>document.getElementById("cantHoras")).value = ""+suma;
   }
+
+
   private actualizarVista(): void {
     this.myViewModel = this.model.clone();
     if (this.applicationStateService.getIsMobileResolution())
