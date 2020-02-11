@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../_services/auth.service';
-import { TokenStorageService } from '../_services/token-storage.service';
+import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApplicationStateService } from '../_services/aplication-state.service';
 import { ProyectoListComponent } from './proyecto-list.component';
