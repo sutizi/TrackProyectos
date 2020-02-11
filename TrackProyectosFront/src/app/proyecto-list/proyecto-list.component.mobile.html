@@ -35,44 +35,46 @@
   
   
   <!-- Modal para agregar horas -->
-  
   <div class="modal hide fade in" data-keyboard="false" data-backdrop="static" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cerrar()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form #hora='ngForm' (ngSubmit)="AgregarHoras(hora)" class="form-horizontal" style="width:50%">
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Cantidad de horas:</label>
-              <input type="number" value="1" class="form-control" min="0" max="24" [(ngModel)]='hora.cantidad' name="cantidad" #cantidad="ngModel" required>
-            </div>
-            <div class="alert-danger">
-              <div *ngIf="hora.cantidad < 0 || hora.cantidad >24">La cantidad de horas debe ser mayor a cero y menor a 24</div>
-            </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Dia:</label>
-              <input type="date" class="form-control" [(ngModel)]='hora.dia' name="dia" #dia="ngModel" required>
-            </div>
-            <div class="form-group">
-              <label for="message-text" class="col-form-label">Descripcion:</label>
-              <textarea type="text" class="form-control" [(ngModel)]='hora.descripcion' name="descripcion"
-                #descripcion="ngModel"></textarea>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregue horas al proyecto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="cerrar()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #hora='ngForm'  class="form-horizontal" style="width:50%">
           <div class="form-group">
-          <button type="button" class="btn btn-primary" [disabled]= "(hora.cantidad > 0 && hora.cantidad <= 24 && hora.dia)? false : true" (click)="AgregarHoras(hora)"  
-           data-dismiss="modal">Agregar</button>
-            </div>
-          <button type="button" class="btn btn-secondary" style="margin: 10px" (click)="cancel()"
-            data-dismiss="modal">Cancelar</button>
-        </div>
+            <label for="recipient-name" class="col-form-label">Cantidad de horas:</label>
+            <div> <label for="cantidadHoras">{{cantidadHoras}}</label></div>
+            <button (click)="sumarHora()" style="margin: 5px;"><img src="assets/mas.jpg"></button>
+            <button (click)="restarHora()" style="margin: 5px;"><img src="assets/menos.jpg"></button>
+          </div>
+          <div class="alert-danger">
+            <div *ngIf="cantidadHoras < 0 || cantidadHoras >24">La cantidad de horas debe ser mayor a cero y menor a 24</div>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Dia:</label>
+            <input type="date"  id="theDate" class="form-control" [(ngModel)]='hora.dia' (ngModelChange)='hora.dia=$event'  name="dia" #dia="ngModel" required>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Descripcion:</label>
+            <textarea type="text" class="form-control" [(ngModel)]='hora.descripcion' name="descripcion"
+              #descripcion="ngModel"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="form-group">
+        <button type="button" class="btn btn-primary" [disabled]= "(cantidadHoras > 0 && cantidadHoras <= 24)? false : true" (click)="AgregarHoras(hora)"  
+         data-dismiss="modal">Agregar</button>
+          </div>
+        <button type="button" class="btn btn-secondary" style="margin: 10px" (click)="cancel()"
+          data-dismiss="modal">Cancelar</button>
+      </div>
       </div>
     </div>
   </div>

@@ -1,5 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core';
-import { AuthService } from '../_services/auth.service';
+import { Component, Injectable } from '@angular/core';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApplicationStateService } from '../_services/aplication-state.service';

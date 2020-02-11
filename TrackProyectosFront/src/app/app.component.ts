@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from './_services/token-storage.service';
 import { AuthService } from './_services/auth.service';
 import { Usuario } from './_models/usuario';
