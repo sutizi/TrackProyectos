@@ -61,9 +61,9 @@ aria-hidden="true">
           <label for="recipient-name" class="col-form-label">Dia:</label>
           <input type="date"  id="theDate" class="form-control" [(ngModel)]='hora.dia' (ngModelChange)='hora.dia=$event'  name="dia" #dia="ngModel" required>
         </div>
-        <div class="alert-danger">
+        <!-- <div class="alert-danger">
           <div *ngIf="esFechaValida(hora.dia)">La fecha debe estar dentro de los limites del proyecto</div>
-        </div>
+        </div> -->
         <div class="form-group">
           <label for="message-text" class="col-form-label">Descripcion:</label>
           <textarea type="text" class="form-control" [(ngModel)]='hora.descripcion' name="descripcion"

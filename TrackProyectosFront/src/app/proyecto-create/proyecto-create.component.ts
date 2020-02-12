@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, TemplateRef } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, TemplateRef } from '@angular/core';
 import { ProyectoService } from '../_services/proyecto.service';
 import { Router } from '@angular/router';
 import { ProyectoDTO } from '../_models/ProyectoDTO';

@@ -40,9 +40,9 @@
       </tr>
     </tbody>
   </table>
-
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <br>
+  <div class="btn-group droprigh">
+    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Todos
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -50,11 +50,10 @@
       <tr *ngFor="let proyecto of Proyecto">
         <button class="dropdown-item" type="button" (click)="loadEstadisticaProyecto(proyecto.id, proyecto.nombre)">{{proyecto.nombre}}</button>
        <script >document.getElementById("dropdownMenu2").value="New Button Text";</script>
-
       </tr>
     </div>
   </div>
-
+  <br><br>
   <h2> Resumen de esta semana</h2>
   <div *ngIf="Estadistica.horasDTOSemana !== undefined">
     <table class="table table-striped">

@@ -1,8 +1,7 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { Router } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Usuario } from '../_models/usuario';
 import { ApplicationStateService } from '../_services/aplication-state.service';
 

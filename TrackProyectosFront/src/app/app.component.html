@@ -75,11 +75,36 @@
   </nav>
 
   
-
-
 <div class="container">
   <router-outlet></router-outlet>
 </div>  
+
+<div class="footer">
+  <footer id="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<h6>Sobre Nosotros</h6>
+					<ul>
+						<li>
+							<a href="https://github.com/sutizi" target="_blank">Sebastian Utizi</a>
+						</li>
+						<li>
+							<a href="https://github.com/LeandroAmigo" target="_blank">Leandro Amigo</a>
+						</li>
+					</ul>
+				</div>
+					<div class="iconos" *ngIf="!isMobile">
+						<a href="https://www.facebook.com/TrackProyectos" target="_blank" class="f1 fa fa-facebook"></a>
+						<a href="https://twitter.com/TrackProyectos" target="_blank" class="f2 fa fa-twitter"></a>
+						<a href="https://www.instagram.com/TrackProyectos" target="_blank" class="f3 fa fa-linkedin"></a>
+						<a href="https://www.linkedin.com/TrackProyectos" target="_blank" class="f4 fa fa-instagram"></a>						
+					</div>
+			</div>
+		</div>
+	</footer>
+
+</div>
 
 </div>
 

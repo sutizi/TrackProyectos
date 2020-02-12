@@ -8,7 +8,6 @@ import { ApplicationStateService } from '../_services/aplication-state.service';
 import { ProyectoDTO } from '../_models/ProyectoDTO';
 import { LoginComponent } from '../login/login.component';
 import { TokenStorageService } from '../_services/token-storage.service';
-import { StylesCompileDependency } from '@angular/compiler';
 
 @Component({
   selector: 'app-proyecto-list',
@@ -21,6 +20,7 @@ export abstract class ProyectoListComponent implements OnInit {
   IdProyectoHoras: any;
 
   Proyecto: any = [];
+  ProyectoValidate: any;
 
   errorMessage = 'Error';
 
@@ -113,6 +113,8 @@ export abstract class ProyectoListComponent implements OnInit {
 
   mostrarModal() {
     this.modalService.open(this.modal);
+    this.obtenerFechasDeProyecto();
+
   }
 
   mostrarEliminar() {
@@ -150,10 +152,19 @@ export abstract class ProyectoListComponent implements OnInit {
     this.cantidadHoras--;
   }
 
-  esFechaValida(dia){
-    //suscribe con idproyecto horas y obtenes el proyecto
-    //comparas las fechas del backend con dia
+  /*esFechaInvalida(dia){
+    console.log("inicio "+this.ProyectoValidate.fechaInicio);
+    console.log("fin "+this.ProyectoValidate.fechaFinalizacion);
+    console.log("dia "+dia);
+    var valor = (dia < this.ProyectoValidate.fechaInicio || dia> this.ProyectoValidate.fechaFinalizacion);
+    console.log(valor);
+    return valor;
+    }*/
 
+  obtenerFechasDeProyecto(){ 
+    this.restApi.getProyecto(this.IdProyectoHoras).subscribe((data: {}) => {
+      this.ProyectoValidate = data;
+    })
   }
 
 
