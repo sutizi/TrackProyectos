@@ -49,7 +49,6 @@
       <button class="dropdown-item" type="button" (click)="loadEstadisticaTodos()">Todos</button>
       <tr *ngFor="let proyecto of Proyecto">
         <button class="dropdown-item" type="button" (click)="loadEstadisticaProyecto(proyecto.id, proyecto.nombre)">{{proyecto.nombre}}</button>
-       <script >document.getElementById("dropdownMenu2").value="New Button Text";</script>
       </tr>
     </div>
   </div>
