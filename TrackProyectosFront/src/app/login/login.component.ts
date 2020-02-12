@@ -51,14 +51,6 @@ export abstract class LoginComponent implements OnInit {
 
   private actualizarVista(): void {
     this.myViewModel = this.model.clone();
-    if (this.applicationStateService.getIsMobileResolution())
-    {
-        console.log("mobile"+"....is mobile resolution:"+this.isMobileResolution)
-    }
-    else
-    {
-      console.log("desktop"+"....is mobile resolution:"+this.isMobileResolution);
-    }
     }
 
     updateMantenerSesion()

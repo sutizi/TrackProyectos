@@ -25,11 +25,13 @@ const desktop_routes: Routes = [
   { path: 'estadistica', component: EstadisticaComponent, canActivate:[AuthGuard]},
   { path: 'proyecto-create', component: ProyectoCreateComponent, canActivate:[AuthGuard] },
   { path: 'proyecto-edit/:id', component: ProyectoEditComponent, canActivate:[AuthGuard] },  
-  { path: '', redirectTo: '/home', pathMatch: 'full' } ];
+  { path: '**', redirectTo: '/home', pathMatch: 'full' } ];
 
 const mobile_routes: Routes = [
   {path: 'login', component: LoginComponentMobile },
-  { path: 'proyecto-list', component: ProyectoListComponentMobile, canActivate:[AuthGuard] }
+  { path: 'proyecto-list', component: ProyectoListComponentMobile, canActivate:[AuthGuard] },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -45,7 +47,6 @@ export class AppRoutingModule {
     private applicationStateService: ApplicationStateService) {
 
     if (applicationStateService.getIsMobileResolution()) {
-      console.log(applicationStateService.getIsMobileResolution());
       router.resetConfig(mobile_routes);
     }
   }
