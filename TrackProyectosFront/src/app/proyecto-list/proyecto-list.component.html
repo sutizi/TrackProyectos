@@ -79,7 +79,10 @@
           </div>
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Dia:</label>
-            <input type="date"  id="theDate" class="form-control" [(ngModel)]='hora.dia' (ngModelChange)='hora.dia=$event'  name="dia" #dia="ngModel" required>
+            <input type="date"  id="theDate" class="form-control" [(ngModel)]='hora.dia' (ngModelChange)='hora.dia=$event; esFechaInvalida(hora)'  name="dia" #dia="ngModel" required>
+            <div class="alert-danger">
+              <div *ngIf = "fechaInvalida">La fecha debe estar dentro de los limites del proyecto</div>
+            </div>
           </div>       
           <div class="form-group">
             <label for="message-text" class="col-form-label">Descripcion:</label>
@@ -90,7 +93,7 @@
       </div>
       <div class="modal-footer">
         <div class="form-group">
-        <button type="button" class="btn btn-primary" [disabled]= "(cantidadHoras > 0 && cantidadHoras <= 24)? false : true" (click)="AgregarHoras(hora)"  
+        <button type="button" class="btn btn-primary" [disabled]= "((cantidadHoras > 0 && cantidadHoras <= 24) && (!fechaInvalida))? false : true"  (click)="AgregarHoras(hora)"  
          data-dismiss="modal">Agregar</button>
           </div>
         <button type="button" class="btn btn-secondary" style="margin: 10px" (click)="cancel()"

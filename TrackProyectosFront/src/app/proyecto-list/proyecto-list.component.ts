@@ -53,9 +53,7 @@ export abstract class ProyectoListComponent implements OnInit {
     this.actualizarVista();
    }
 
-  ngOnInit() {
-
-    console.log(JSON.parse(localStorage.getItem('mantenerSesion'))+'mantener');
+   ngOnInit() {
     if (this.tokenStorage.getToken()) {
       if(JSON.parse(localStorage.getItem('mantenerSesion')) == true)
       {
@@ -168,14 +166,6 @@ export abstract class ProyectoListComponent implements OnInit {
 
   private actualizarVista(): void {
     this.myViewModel = this.model.clone();
-    if (this.applicationStateService.getIsMobileResolution())
-    {
-        console.log("mobile"+"....is mobile resolution:"+this.isMobileResolution)
-    }
-    else
-    {
-      console.log("desktop"+"....is mobile resolution:"+this.isMobileResolution);
-    }
     }
 
     logout() {
