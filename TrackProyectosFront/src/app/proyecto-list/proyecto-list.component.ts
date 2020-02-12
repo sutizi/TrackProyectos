@@ -30,6 +30,7 @@ export abstract class ProyectoListComponent implements OnInit {
 
   idEliminar = 0;
   cantidadHoras=1;
+  fechaInvalida = true;
 
   loginComponent = null;
 
@@ -62,9 +63,7 @@ export abstract class ProyectoListComponent implements OnInit {
       }
       else //si mantener sesion es falso
       {
-
         this.loadProyectos();
-
       }
     }
   }
@@ -113,8 +112,6 @@ export abstract class ProyectoListComponent implements OnInit {
 
   mostrarModal() {
     this.modalService.open(this.modal);
-    this.obtenerFechasDeProyecto();
-
   }
 
   mostrarEliminar() {
@@ -142,6 +139,9 @@ export abstract class ProyectoListComponent implements OnInit {
 
     var today = year + "-" + month + "-" + day;
     (<HTMLInputElement>document.getElementById("theDate")).value = today;
+    var hora = new HoraDTO();
+    hora.dia = new Date(today);
+    this.esFechaInvalida(hora);
     return today;
   }
 
@@ -152,21 +152,19 @@ export abstract class ProyectoListComponent implements OnInit {
     this.cantidadHoras--;
   }
 
-  /*esFechaInvalida(dia){
-    console.log("inicio "+this.ProyectoValidate.fechaInicio);
-    console.log("fin "+this.ProyectoValidate.fechaFinalizacion);
-    console.log("dia "+dia);
-    var valor = (dia < this.ProyectoValidate.fechaInicio || dia> this.ProyectoValidate.fechaFinalizacion);
-    console.log(valor);
-    return valor;
-    }*/
-
-  obtenerFechasDeProyecto(){ 
-    this.restApi.getProyecto(this.IdProyectoHoras).subscribe((data: {}) => {
+  esFechaInvalida(hora){
+   let id = this.IdProyectoHoras;
+    if(id > 0)
+    {
+    this.restApi.getProyecto(id).subscribe((data: {}) => {
       this.ProyectoValidate = data;
-    })
+    var valor = (new Date(new Date(hora.dia).setHours(24,0,0,0)) < new Date(this.ProyectoValidate.fechaInicio) || new Date(hora.dia).getTime()> new Date(this.ProyectoValidate.fechaFinalizacion).getTime());
+    this.fechaInvalida = valor;
+    });
   }
-
+    else
+    return true;
+  }
 
   private actualizarVista(): void {
     this.myViewModel = this.model.clone();

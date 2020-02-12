@@ -27,7 +27,6 @@ export abstract class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.mantenerSesion = true;
-    console.log(this.mantenerSesion+'mantener');
 
 }
 
@@ -64,13 +63,10 @@ export abstract class LoginComponent implements OnInit {
 
     updateMantenerSesion()
     {
-      console.log(this.mantenerSesion+'antes');
       if(this.mantenerSesion == true)
         this.mantenerSesion = false;
       else
         this.mantenerSesion = true;
-      console.log(this.mantenerSesion+'despues');
-
       localStorage.setItem('mantenerSesion', JSON.stringify(this.mantenerSesion));
     }
 
